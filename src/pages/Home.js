@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <>
       <Link to="/contoh-tema-1/Nama Penerima">
-        <Button>pencet nih</Button>
+        <Button>pencet ini yaa</Button>
       </Link>
     </>
   );

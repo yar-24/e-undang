@@ -7,10 +7,9 @@ import BingkaiCicle from "../components/BingkaiCicle";
 import { Img3 } from "../assets/images";
 import { FiFacebook, FiInstagram } from "react-icons/fi";
 import { mobile } from "../../../responsive";
+import { Fade } from "react-reveal";
 
-const Background = styled.section`
-
-`;
+const Background = styled.section``;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -88,24 +87,27 @@ const WrapperIcon = styled.a`
 
 const Profile = ({ foto, id }) => {
   return (
-    <Background id={id} >
+    <Background id={id}>
       <Container>
         <Top>
-          <Image src={Bismillah} />
-          <Salam>Assalamu’alaikum Wr Wb</Salam>
-          <Text>
-            Maha suci Allah yang telah menciptakan mahluk-Nya
-            berpasang-pasangan. Ya Allah, perkenankanlah kami merangkai kasih
-            sayang yang Kau ciptakan diantara kami untuk mengikuti Sunnah
-            Rasul-Mu dalam rangka membentuk kelurga yang sakinah, mawaddah,
-            warahmah.
-          </Text>
+          <Fade bottom>
+            <Image src={Bismillah} />
+            <Salam>Assalamu’alaikum Wr Wb</Salam>
+            <Text>
+              Maha suci Allah yang telah menciptakan mahluk-Nya
+              berpasang-pasangan. Ya Allah, perkenankanlah kami merangkai kasih
+              sayang yang Kau ciptakan diantara kami untuk mengikuti Sunnah
+              Rasul-Mu dalam rangka membentuk kelurga yang sakinah, mawaddah,
+              warahmah.
+            </Text>
+          </Fade>
         </Top>
         <Middle>
           {/* MEMPELAI CEWE */}
 
           <Mempelai>
             <BingkaiCicle foto={Img3} />
+
             <Nama>Juliet Putri</Nama>
             <Ortu>Putri Pertama Bapak Juli & Ibu Putri</Ortu>
             <ContainerIcon>

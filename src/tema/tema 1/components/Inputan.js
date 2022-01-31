@@ -19,10 +19,11 @@ border-right: none;
 border-bottom: 2px solid ${colors.secondary};
 `;
 
-const Inputan = ({ label, placeholder, type, name }) => {
+const Inputan = ({ label, placeholder, type, name, onChange, value }) => {
+
   return (
     <Container>
-      <TextInput placeholder={placeholder} type={type} name={name} />
+      <TextInput placeholder={placeholder} type={type} name={name} onChange={onChange}/>
       <Text>{label}</Text>
     </Container>
   );

@@ -5,7 +5,7 @@ import Button from "../components/Button";
 import { SiGooglemaps } from "react-icons/si";
 import { colors, fonts } from "../../../utils";
 import { mobile } from "../../../responsive";
-import { Fade } from "react-reveal";
+import { Bounce, Fade } from "react-reveal";
 
 const Background = styled.div`
   padding-top: 30px;
@@ -102,29 +102,37 @@ const Akad = () => {
       <Fade left>
         <ImgBunga src={Bunga1} />
       </Fade>
-      <Image src={Img4} />
-      <Container>
-        <ContainerAkad>
-          <AkadNikah>
-            <Title>Akad Nikah</Title>
-            <Tanggal>11 November 2025</Tanggal>
-            <Pukul>Pukul 10:00</Pukul>
-            <Alamat>
-              Alamat : Ds Konohagakure Kec. Konoha Kab. Negara Api
-            </Alamat>
-          </AkadNikah>
-          <AkadNikah>
-            <Title>Resepsi nikah</Title>
-            <Tanggal>11 November 2025</Tanggal>
-            <Pukul>Pukul 10:00</Pukul>
-            <Alamat>
-              Alamat : Ds Konohagakure Kec. Konoha Kab. Negara Api
-            </Alamat>
-          </AkadNikah>
-        </ContainerAkad>
-        <Button width={"250px"} label="Kunjungi Lokasi Via Gmaps" icon={<SiGooglemaps />} link="https://goo.gl/maps/AteGNbZYT6zuuXn5A" />
-
-      </Container>
+      <Fade left>
+        <Image src={Img4} />
+      </Fade>
+      <Bounce bottom cascade>
+        <Container>
+          <ContainerAkad>
+            <AkadNikah>
+              <Title>Akad Nikah</Title>
+              <Tanggal>11 November 2025</Tanggal>
+              <Pukul>Pukul 10:00</Pukul>
+              <Alamat>
+                Alamat : Ds Konohagakure Kec. Konoha Kab. Negara Api
+              </Alamat>
+            </AkadNikah>
+            <AkadNikah>
+              <Title>Resepsi nikah</Title>
+              <Tanggal>11 November 2025</Tanggal>
+              <Pukul>Pukul 10:00</Pukul>
+              <Alamat>
+                Alamat : Ds Konohagakure Kec. Konoha Kab. Negara Api
+              </Alamat>
+            </AkadNikah>
+          </ContainerAkad>
+          <Button
+            width={"250px"}
+            label="Kunjungi Lokasi Via Gmaps"
+            icon={<SiGooglemaps />}
+            link="https://goo.gl/maps/AteGNbZYT6zuuXn5A"
+          />
+        </Container>
+      </Bounce>
       <BAwan>
         <CountainerText>
           <Text>

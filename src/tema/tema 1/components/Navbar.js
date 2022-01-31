@@ -18,14 +18,14 @@ const Container = styled.ul`
   border: 1px solid ${colors.primary};
   bottom: 0;
   margin-bottom: 30px;
-  ${mobile({height: "60px" })};
+  ${mobile({ height: "60px" })};
 `;
 
 const ContainerButton = styled(LinkS)`
-display: flex;
-align-items: center;
-justify-content: center;
-margin-right: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 40px;
   cursor: pointer;
 `;
 const Image = styled.img``;

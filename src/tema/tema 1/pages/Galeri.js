@@ -1,13 +1,14 @@
 import React from "react";
+import { Bounce } from "react-reveal";
 import YouTube from "react-youtube";
 import styled from "styled-components";
 import { mobile } from "../../../responsive";
 import { colors, fonts } from "../../../utils";
-import {Background} from '../assets/images'
+import { Background } from "../assets/images";
 import Foto from "../components/Foto";
 
 const Container = styled.div`
-background-image: url(${Background});
+  background-image: url(${Background});
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -17,11 +18,11 @@ background-image: url(${Background});
   ${mobile({ marginTop: "-10px" })};
 `;
 const Text = styled.h1`
-    font-family: ${fonts.secondary};
-    color: ${colors.primary};
-    margin: 50px 0 50px;
-    font-size: 35px;
-    ${mobile({ margin: "20px 0 20px", fontSize: "30px" })};
+  font-family: ${fonts.secondary};
+  color: ${colors.primary};
+  margin: 50px 0 50px;
+  font-size: 35px;
+  ${mobile({ margin: "20px 0 20px", fontSize: "30px" })};
 `;
 const ContainerFoto = styled.div`
   height: 100vh;
@@ -31,7 +32,7 @@ const ContainerFoto = styled.div`
   ${mobile({ height: "50vh" })};
 `;
 
-const Galeri = ({id}) => {
+const Galeri = ({ id }) => {
   const opts = {
     height: "200",
     width: "330",
@@ -41,12 +42,14 @@ const Galeri = ({id}) => {
     },
   };
   return (
-    <Container id={id} >
+    <Container id={id}>
       <Text>Galeri Kami</Text>
       <ContainerFoto>
         <Foto />
       </ContainerFoto>
-      <YouTube videoId="MsntDa_6TQw" opts={opts} />
+      <Bounce left>
+        <YouTube videoId="MsntDa_6TQw" opts={opts} />
+      </Bounce>
     </Container>
   );
 };

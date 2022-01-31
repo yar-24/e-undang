@@ -1,6 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import {Lingkaran } from '../assets/images';
+import React from "react";
+import { Fade } from "react-reveal";
+import styled from "styled-components";
+import { Lingkaran } from "../assets/images";
 
 const ContainerLingkaran = styled.div`
   display: flex;
@@ -21,12 +22,14 @@ const Bingkai = styled.img`
   z-index: 3;
 `;
 
-const BingkaiCicle = ({mb, foto}) => {
+const BingkaiCicle = ({ mb, foto }) => {
   return (
-    <ContainerLingkaran style={{marginBottom: mb}}>
-    <Bingkai src={Lingkaran} />
-    <Image src={foto} />
-  </ContainerLingkaran>
+    <Fade bottom>
+      <ContainerLingkaran style={{ marginBottom: mb }}>
+        <Bingkai src={Lingkaran} />
+        <Image src={foto} />
+      </ContainerLingkaran>
+    </Fade>
   );
 };
 

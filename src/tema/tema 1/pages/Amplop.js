@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../../../responsive";
 import { ShopeePay, Bri, Background5 } from "../assets";
 import { FaCopy } from "react-icons/fa";
 import { colors, fonts } from "../../../utils";
 import Button from "../components/Button";
+import { Bounce } from "react-reveal";
 
 const Background = styled.div`
   background-image: url(${Background5});
@@ -67,56 +68,60 @@ const Image = styled.img`
 const ContainerButton = styled.div``;
 
 const Amplop = () => {
+  const [Bridone, BrisetDone] = useState(false);
+  const [Spdone, SpsetDone] = useState(false);
 
   return (
     <Background>
-      <Container>
-        <ContainerText>
-          <Title>Amplop Digital</Title>
-          <Text>
-            Doa restu Anda merupakan karunia yang sangat berarti bagi kami.
-          </Text>
-          <Text>
-            Dan jika memberi adalah ungkapan tanda kasih Anda, Anda dapat
-            memberi kado secara cashless dengan mengirim amplop digital secara
-            transfer pada akun di bawah ini :
-          </Text>
-        </ContainerText>
-        <ContainerCard>
-          <Image src={Bri} />
-          <Text> 
-            No. Rekening : 42424242
-          </Text>
-          <Hr />
-          <Text>A/n Romeo Ramadhan</Text>
-          <ContainerButton>
-            <Button
-              padding={"0px"}
-              width={"150px"}
-              label="Copy Text"
-              icon={<FaCopy />}
-              onClick={() => navigator.clipboard.writeText('4242424242')}
-            />
-          </ContainerButton>
-        </ContainerCard>
-        <ContainerCard>
-          <Image src={ShopeePay} />
-          <Text>
-            No. Telp : 085742068498
-          </Text>
-          <Hr />
-          <Text>A/n Romeo Ramadhan</Text>
-          <ContainerButton>
-            <Button
-              padding={"0px"}
-              width={"150px"}
-              label="Copy Text"
-              icon={<FaCopy />}
-              onClick={() => navigator.clipboard.writeText('085742068498')}
-            />
-          </ContainerButton>
-        </ContainerCard>
-      </Container>
+      <Bounce bottom cascade>
+        <Container>
+            <ContainerText>
+              <Title>Amplop Digital</Title>
+              <Text>
+                Doa restu Anda merupakan karunia yang sangat berarti bagi kami.
+              </Text>
+              <Text>
+                Dan jika memberi adalah ungkapan tanda kasih Anda, Anda dapat
+                memberi kado secara cashless dengan mengirim amplop digital
+                secara transfer pada akun di bawah ini :
+              </Text>
+            </ContainerText>
+          <ContainerCard>
+            <Image src={Bri} />
+            <Text>No. Rekening : 42424242</Text>
+            <Hr />
+            <Text>A/n Romeo Ramadhan</Text>
+            <ContainerButton>
+              <Button
+                padding={"0px"}
+                width={"150px"}
+                label={(Bridone && "Copy Berhasil") || "Copy Text"}
+                icon={<FaCopy />}
+                onClick={() =>
+                  BrisetDone(navigator.clipboard.writeText("4242424242"))
+                }
+              />
+            </ContainerButton>
+          </ContainerCard>
+          <ContainerCard>
+            <Image src={ShopeePay} />
+            <Text>No. Telp : 085742068498</Text>
+            <Hr />
+            <Text>A/n Romeo Ramadhan</Text>
+            <ContainerButton>
+              <Button
+                padding={"0px"}
+                width={"150px"}
+                label={(Spdone && "Copy Berhasil") || "Copy Text"}
+                icon={<FaCopy />}
+                onClick={() =>
+                  SpsetDone(navigator.clipboard.writeText("085742068498"))
+                }
+              />
+            </ContainerButton>
+          </ContainerCard>
+        </Container>
+      </Bounce>
     </Background>
   );
 };

@@ -2,9 +2,9 @@ import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { colors, fonts } from "../../../utils";
 import Inputan from "../components/Inputan";
-import Button from "../components/Button";
 import { Background5 } from "../assets";
 import emailjs from "@emailjs/browser";
+import { Zoom } from "react-reveal";
 
 const Background = styled.div`
   background-image: url(${Background5});
@@ -15,24 +15,31 @@ const Background = styled.div`
   width: 100%;
   height: 100vh;
 `;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   padding-bottom: 50px;
 `;
+
 const ContainerText = styled.div``;
+
 const Title = styled.h1`
   font-family: ${fonts.secondary};
   color: ${colors.primary};
 `;
+
 const Text = styled.p``;
+
 const ContainerForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
+
 const TextArea = styled.textarea`
   padding: 10px;
   margin-top: 10px;
@@ -43,6 +50,28 @@ const TextArea = styled.textarea`
   border-bottom: 2px solid ${colors.secondary};
   font-family: ${fonts.primary};
 `;
+
+const Button = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  background-color: ${colors.primary};
+  color: white;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  font-size: 1rem;
+  font-family: ${fonts.primary};
+  cursor: pointer;
+  :hover {
+    background-color: ${colors.secondary};
+    color: black;
+  }
+`;
+
 
 const FormUcapan = ({ id }) => {
   const form = useRef();
@@ -69,44 +98,48 @@ const FormUcapan = ({ id }) => {
       );
   };
 
+
+
   return (
     <Background id={id}>
-      <Container>
-        <ContainerText>
-          <Title>Ucapkan Sesuatu</Title>
-          <Text>Berikan ucapan & Doa Restu Kalian</Text>
-        </ContainerText>
-        <ContainerForm ref={form} onSubmit={sendEmail}>
-          <Inputan
-            placeholder="Masukan Nama"
-            type="text"
-            name="nama_pengirim"
-          />
-          <Inputan
-            placeholder="Masukan Email"
-            type="email"
-            name="email_pengirim"
-          />
-          <Inputan
-            placeholder="Masukan No.Telp"
-            type="tel"
-            name="noHp_pengirim"
-          />
-          <TextArea
-            placeholder="Ucapkan Sesuatu"
-            rows="4"
-            cols="35"
-            name="ucapan"
-          />
-          <Button
-            label="Kirimkan Ucapan"
-            width={"200px"}
-            margin={"20px 0 20px"}
-            padding={0}
-          />
-          {done && "Terima Kasih!!"}
-        </ContainerForm>
-      </Container>
+      <Zoom bottom>
+        <Container>
+          <ContainerText>
+            <Title>Ucapkan Sesuatu</Title>
+            <Text>Berikan ucapan & Doa Restu Kalian</Text>
+          </ContainerText>
+          <ContainerForm ref={form} onSubmit={sendEmail}>
+            <Inputan
+              placeholder="Masukan Nama"
+              type="text"
+              name="nama_pengirim"
+            />
+            <Inputan
+              placeholder="Masukan Email"
+              type="email"
+              name="email_pengirim"
+            />
+            <Inputan
+              placeholder="Masukan No.Telp"
+              type="tel"
+              name="noHp_pengirim"
+            />
+            <Inputan
+              placeholder="Daftar Kehadiran"
+              type="text"
+              name="kehadiran"
+            />
+            <TextArea
+              placeholder="Ucapkan Sesuatu"
+              rows="4"
+              cols="35"
+              name="ucapan"
+            />
+            <Button>kirim Ucapan</Button>
+            {done && "Pesan Terkirim, Terima Kasih!!"}
+          </ContainerForm>
+        </Container>
+      </Zoom>
     </Background>
   );
 };
