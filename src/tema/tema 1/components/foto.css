@@ -1,0 +1,147 @@
+.gallery{
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    padding: 0 12px;
+}
+
+.ContainerText{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin: 20px 0px 20px;
+    padding: 0 20px 0;
+    background-color: #f7fafc;
+}
+
+.ContainerText h1{
+    font-size: 2rem;
+    color: #4faca6;
+}
+
+
+.ContainerText p{
+    font-size: 1.5rem;
+}
+
+.gallery .pics{
+    -webkit-transition: all 350ms ease;
+    transition: all 350ms ease;
+    cursor: pointer;
+    margin-bottom: 12px;
+}
+
+.gallery .pics:hover{
+    filter: opacity(.8);
+}
+
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10vh 0px 50px;
+}
+
+.button{
+    width: 50%;
+    height: auto;
+    background-color: #4faca6;
+    color: #ffffff;
+    text-decoration: none;
+    text-align: center;
+    font-size: 20px;
+    letter-spacing: 3px;
+    font-weight: 600;
+    border-radius: 5px;
+    border: 1px solid #333;
+    padding: 20px;
+}
+
+.button:hover{
+    background-color: #ffffff;
+    border: 2px solid #4faca6;
+    color: #4faca6;
+}
+
+@media (max-width: 991px){
+    .gallery{
+        -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    }
+
+    .ContainerText{
+        margin: 10px;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .ContainerText h1{
+        font-size: 1.2rem;
+        margin-bottom: 0;
+    }
+
+    .ContainerText p{
+        font-size: .7rem;
+    }
+    .buttonContainer{
+        margin: 30px 0px 30px;
+    }
+
+    .button{
+        font-size: 10px;
+        padding: 10px;
+    }
+}
+
+/*model*/
+
+.model{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0,0.9) ;
+    transition: opacity .4s ease, visibility .4s ease, transform .5s ease-in-out;
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0);
+    overflow: hidden;
+    z-index: 999;
+}
+
+.model.open{
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.model img{
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    display: block;
+    line-height: 0;
+    box-sizing: border-box;
+    padding: 20px 20px 20px;
+    margin: 0 auto;
+}
+
+.model.open svg{
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 2rem;
+    height: 2rem;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #ffffff;
+    cursor: pointer;
+}
