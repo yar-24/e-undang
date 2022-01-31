@@ -5,6 +5,7 @@ import Inputan from "../components/Inputan";
 import { Background5 } from "../assets";
 import emailjs from "@emailjs/browser";
 import { Zoom } from "react-reveal";
+import { ipon } from "../../../responsive";
 
 const Background = styled.div`
   background-image: url(${Background5});
@@ -14,6 +15,7 @@ const Background = styled.div`
   background-position: 100%;
   width: 100%;
   height: 100vh;
+  ${ipon({ height: "120vh" })};
 `;
 
 const Container = styled.div`
@@ -23,6 +25,7 @@ const Container = styled.div`
   align-items: center;
   text-align: center;
   padding-bottom: 50px;
+  margin-top: 30px;
 `;
 
 const ContainerText = styled.div``;

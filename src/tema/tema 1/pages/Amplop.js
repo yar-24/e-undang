@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { mobile } from "../../../responsive";
+import { ipon, mobile } from "../../../responsive";
 import { ShopeePay, Bri, Background5 } from "../assets";
 import { FaCopy } from "react-icons/fa";
 import { colors, fonts } from "../../../utils";
@@ -17,6 +17,7 @@ const Background = styled.div`
   height: 100vh;
   padding-bottom: 300px;
   ${mobile({ paddingBottom: "200px" })};
+  ${ipon({ height: "120vh" })};
 `;
 const Container = styled.div`
   display: flex;

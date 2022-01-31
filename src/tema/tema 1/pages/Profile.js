@@ -1,15 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 import { colors, fonts } from "../../../utils";
-import { Img2 } from "../assets/images";
-import { Bismillah } from "../assets/images";
+import { Img2, Img3, Bismillah, Bingkai } from "../assets/images";
 import BingkaiCicle from "../components/BingkaiCicle";
-import { Img3 } from "../assets/images";
 import { FiFacebook, FiInstagram } from "react-icons/fi";
 import { mobile } from "../../../responsive";
 import { Fade } from "react-reveal";
 
-const Background = styled.section``;
+const Background = styled.section`
+ background-image: url(${Bingkai});
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  background-position: 100%;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 30px;
+`;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -28,6 +35,7 @@ const Image = styled.img`
   width: 500px;
   ${mobile({ width: "250px" })};
 `;
+
 const Salam = styled.h3`
   font-family: ${fonts.secondary};
   color: ${colors.primary};
@@ -85,9 +93,9 @@ const WrapperIcon = styled.a`
   }
 `;
 
-const Profile = ({ foto, id }) => {
+const Profile = ({id}) => {
   return (
-    <Background id={id}>
+    <Background id={id} >
       <Container>
         <Top>
           <Fade bottom>

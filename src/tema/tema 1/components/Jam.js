@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { mobile } from "../../../responsive";
+import { ipon, mobile } from "../../../responsive";
 import { colors } from "../../../utils";
 
 const Timer = styled.section`
@@ -10,6 +10,7 @@ const Timer = styled.section`
   justify-content: center;
   height: 100%;
   ${mobile({margin: "0"})};
+  ${ipon({ marginBottom: "20px" })};
 `;
 
 const Container = styled.div`
@@ -26,6 +27,7 @@ const Wrapper = styled.section`
   height: 80px;
   margin: 10px;
   ${mobile({ width: "70px", height: "55px" })};
+  ${ipon({ width: "60px" })};
 `;
 const Waktu = styled.p`
   font-size: 30px;
@@ -40,6 +42,7 @@ const Text = styled.p`
   font-family: "Abril Fatface", cursive;
   margin: 0;
   ${mobile({ fontSize: "12px" })};
+  ${ipon({ marginBottom: "20px" })};
 `;
 
 function Jam() {

@@ -22,7 +22,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: ;
   width: 50%;
   height: 100vh;
   ${mobile({ width: "100%", marginBottom: 0 })};

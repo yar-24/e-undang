@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { mobile } from "../../../responsive";
 import { colors, fonts } from "../../../utils";
 import { Img4, Background2 } from "../assets/images";
 import BingkaiCicle from "../components/BingkaiCicle";
@@ -8,6 +7,7 @@ import Jam from "../components/Jam";
 import Button from "../components/Button";
 import { BsCalendar3 } from "react-icons/bs";
 import Zoom from "react-reveal/Zoom";
+import { ipon } from "../../../responsive";
 
 const Background = styled.section`
   background-image: url(${Background2});
@@ -36,7 +36,7 @@ const Text = styled.h1`
   font-family: ${fonts.primary};
   font-size: 36px;
   color: ${colors.primary};
-  ${mobile({ marginBottom: "-5vh" })};
+  ${ipon({ fontSize: "25px" })};
 `;
 
 const UtamaTema1 = ({ id }) => {

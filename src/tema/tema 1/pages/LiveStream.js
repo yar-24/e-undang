@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Button from "../components/Button";
 import { BsCameraVideoFill } from "react-icons/bs";
 import { Instagram, Yt, Draw, Background5 } from "../assets";
-import { mobile } from "../../../responsive";
+import { ipon, mobile } from "../../../responsive";
 import { colors, fonts } from "../../../utils";
 import { Bounce } from "react-reveal";
 
@@ -16,6 +16,7 @@ const Background = styled.div`
   width: 100%;
   height: 100vh;
   ${mobile({ paddingBottom: "20px" })};
+  ${ipon({ height: "130vh" })};
 `;
 const Container = styled.div`
   display: flex;
@@ -49,6 +50,7 @@ const ContainerLive = styled.div`
     height: "25vh",
     marginBottom: "20px",
   })};
+  ${ipon({ height: "35vh" })};
 `;
 const TitleLive = styled.h2`
   font-family: ${fonts.secondary};
