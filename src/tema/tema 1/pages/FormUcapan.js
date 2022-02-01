@@ -5,17 +5,17 @@ import Inputan from "../components/Inputan";
 import { Background5 } from "../assets";
 import emailjs from "@emailjs/browser";
 import { Zoom } from "react-reveal";
-import { ipon } from "../../../responsive";
+import { ipon, mobile } from "../../../responsive";
 
 const Background = styled.div`
-  background-image: url(${Background5});
+  /* background-image: url(${Background5});
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
   background-position: 100%;
   width: 100%;
   height: 100vh;
-  ${ipon({ height: "120vh" })};
+  */
 `;
 
 const Container = styled.div`
@@ -26,6 +26,8 @@ const Container = styled.div`
   text-align: center;
   padding-bottom: 50px;
   margin-top: 30px;
+  margin-bottom: 100px;
+  ${mobile({ marginTop: "15vh" })};
 `;
 
 const ContainerText = styled.div``;

@@ -6,9 +6,10 @@ import { colors } from "../../../utils";
 import BingkaiCicle from "../components/BingkaiCicle";
 import Partikel from "../components/Partikel";
 import { Img4, Background3 } from "../assets/images";
+import { data } from "../dataUndangan";
 
 const Background = styled.div`
-background-image: url(${Background3});
+  background-image: url(${Background3});
   background-origin: border-box;
   background-size: cover;
   background-position: 100%;
@@ -80,27 +81,24 @@ const Pembukaan = () => {
   let { username } = useParams();
 
   return (
-      <Background>
-        <Partikel />
-        <Container>
-          <BingkaiCicle mb={-30} foto={Img4} />
-          <ContainerText>
-            <NamaMempelai>Romeo & Juliet</NamaMempelai>
-            <Kepada>Kepada</Kepada>
-            <NamaTamu>{username}</NamaTamu>
-            <NamaLain>Bapak/Ibu/Saudara/i</NamaLain>
-            <Text>
-              kami mengundang Anda Untuk Hadir Di Acara Pernikahan Kami
-            </Text>
-          </ContainerText>
-          <Link style={{ textDecoration: "none" }} to="/contoh-tema-1">
-            <Button >
-            Buka Undangan
-            </Button>
-          </Link>
-        </Container>
-      </Background>
-
+    <Background>
+      <Partikel />
+      <Container>
+        <BingkaiCicle mb={-30} foto={Img4} />
+        <ContainerText>
+          {data.map((item) => (
+            <NamaMempelai>{item.nama_pasangan}</NamaMempelai>
+          ))}
+          <Kepada>Kepada</Kepada>
+          <NamaTamu>{username}</NamaTamu>
+          <NamaLain>Bapak/Ibu/Saudara/i</NamaLain>
+          <Text>kami mengundang Anda Untuk Hadir Di Acara Pernikahan Kami</Text>
+        </ContainerText>
+        <Link style={{ textDecoration: "none" }} to="/contoh-tema-1">
+          <Button>Buka Undangan</Button>
+        </Link>
+      </Container>
+    </Background>
   );
 };
 

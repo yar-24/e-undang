@@ -16,5 +16,6 @@ import Awan from './awan.png'
 import Background1 from './background1.jpg'
 import Background4 from './background4.jpg'
 import Background5 from './background5.jpg'
+import Asset1 from './asset1.png'
 
-export {Img, Img1, Img2, Img3, Img4, Bingkai, Bingkai2, Background, Background1, Background2, Background3, Background4, Background5, Bunga,Bunga1, Bismillah, Lingkaran, Awan }
+export {Asset1, Img, Img1, Img2, Img3, Img4, Bingkai, Bingkai2, Background, Background1, Background2, Background3, Background4, Background5, Bunga,Bunga1, Bismillah, Lingkaran, Awan }

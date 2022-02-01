@@ -6,9 +6,9 @@ import { SiGooglemaps } from "react-icons/si";
 import { colors, fonts } from "../../../utils";
 import { ipon, mobile } from "../../../responsive";
 import { Bounce, Fade } from "react-reveal";
+import { data } from "../dataUndangan";
 
-const Background = styled.div`
-`;
+const Background = styled.div``;
 const ImgBunga = styled.img`
   position: absolute;
   width: auto;
@@ -110,34 +110,36 @@ const Akad = () => {
         <ImgBunga src={Bunga1} />
       </Fade>
       <Image src={Img4} />
-      <Bounce bottom cascade>
-        <Container>
-          <ContainerAkad>
-            <AkadNikah>
-              <Title>Akad Nikah</Title>
-              <Tanggal>11 November 2025</Tanggal>
-              <Pukul>Pukul 10:00</Pukul>
-              <Alamat>
-                Alamat : Ds Konohagakure Kec. Konoha Kab. Negara Api
-              </Alamat>
-            </AkadNikah>
-            <AkadNikah>
-              <Title>Resepsi nikah</Title>
-              <Tanggal>11 November 2025</Tanggal>
-              <Pukul>Pukul 10:00</Pukul>
-              <Alamat>
-                Alamat : Ds Konohagakure Kec. Konoha Kab. Negara Api
-              </Alamat>
-            </AkadNikah>
-          </ContainerAkad>
-          <Button
-            width={"250px"}
-            label="Kunjungi Lokasi Via Gmaps"
-            icon={<SiGooglemaps />}
-            link="https://goo.gl/maps/AteGNbZYT6zuuXn5A"
-          />
-        </Container>
-      </Bounce>
+      {data.map((item) => (
+        <Bounce bottom cascade>
+          <Container>
+            <ContainerAkad>
+              <AkadNikah>
+                <Title>Akad Nikah</Title>
+                <Tanggal>{item.tgl_akad}</Tanggal>
+                <Pukul>Pukul {item.jam_akad}</Pukul>
+                <Alamat>
+                  Alamat : {item.alamat_akad}
+                </Alamat>
+              </AkadNikah>
+              <AkadNikah>
+                <Title>Resepsi nikah</Title>
+                <Tanggal>{item.tgl_resepsi}</Tanggal>
+                <Pukul>Pukul {item.jam_resepsi}</Pukul>
+                <Alamat>
+                  Alamat : {item.alamat_resepsi}
+                </Alamat>
+              </AkadNikah>
+            </ContainerAkad>
+            <Button
+              width={"250px"}
+              label="Kunjungi Lokasi Via Gmaps"
+              icon={<SiGooglemaps />}
+              link={item.btn_gmaps}
+            />
+          </Container>
+        </Bounce>
+      ))}
       <BAwan>
         <CountainerText>
           <Text>

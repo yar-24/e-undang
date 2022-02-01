@@ -8,6 +8,7 @@ import Button from "../components/Button";
 import { BsCalendar3 } from "react-icons/bs";
 import Zoom from "react-reveal/Zoom";
 import { ipon } from "../../../responsive";
+import { data } from "../dataUndangan";
 
 const Background = styled.section`
   background-image: url(${Background2});
@@ -42,23 +43,25 @@ const Text = styled.h1`
 const UtamaTema1 = ({ id }) => {
   return (
     <Background id={id}>
+          {data.map((item) => (
       <Container>
         <Zoom>
           <BingkaiCicle mb={5} foto={Img4} />
         </Zoom>
         <ContainerText>
-          <Zoom>
-            <Text>Romeo & Juliet</Text>
-          </Zoom>
+            <Zoom>
+              <Text>{item.nama_pasangan}</Text>
+            </Zoom>
         </ContainerText>
         <Jam />
-        <Button
-          width={"250px"}
-          label="Simpan Acara Ke Kalender"
-          icon={<BsCalendar3 size={30} />}
-          link="https://calendar.google.com/event?action=TEMPLATE&tmeid=M3JxODhvNGlhZTVqbW1tOGY2NW5qb2RlZTUgeWFyZWFwazI0QG0&tmsrc=yareapk24%40gmail.com"
-        />
+          <Button
+            width={"250px"}
+            label="Simpan Acara Ke Kalender"
+            icon={<BsCalendar3 size={30} />}
+            link={item.btn_kalender}
+          />
       </Container>
+        ))}
     </Background>
   );
 };

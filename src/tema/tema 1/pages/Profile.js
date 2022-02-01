@@ -6,9 +6,10 @@ import BingkaiCicle from "../components/BingkaiCicle";
 import { FiFacebook, FiInstagram } from "react-icons/fi";
 import { mobile } from "../../../responsive";
 import { Fade } from "react-reveal";
+import { data } from "../dataUndangan";
 
 const Background = styled.section`
- background-image: url(${Bingkai});
+  background-image: url(${Bingkai});
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
@@ -93,9 +94,9 @@ const WrapperIcon = styled.a`
   }
 `;
 
-const Profile = ({id}) => {
+const Profile = ({ id }) => {
   return (
-    <Background id={id} >
+    <Background id={id}>
       <Container>
         <Top>
           <Fade bottom>
@@ -110,40 +111,43 @@ const Profile = ({id}) => {
             </Text>
           </Fade>
         </Top>
-        <Middle>
-          {/* MEMPELAI CEWE */}
+        {data.map((item) => (
+          <Middle>
+            {/* MEMPELAI CEWE */}
 
-          <Mempelai>
-            <BingkaiCicle foto={Img3} />
+            <Mempelai>
+              <BingkaiCicle foto={Img3} />
+              <Nama>{item.nama_lengkap_cewe}</Nama>
+              <Ortu>{item.nama_ortu_cewe}</Ortu>
+        
+                <ContainerIcon>
+                  <WrapperIcon href={item.btn_fb_cewe} >
+                    <FiFacebook />
+                  </WrapperIcon>
+                  <WrapperIcon href={item.btn_ig_cewe} >
+                    <FiInstagram />
+                  </WrapperIcon>
+                </ContainerIcon>
+    
+            </Mempelai>
 
-            <Nama>Juliet Putri</Nama>
-            <Ortu>Putri Pertama Bapak Juli & Ibu Putri</Ortu>
-            <ContainerIcon>
-              <WrapperIcon>
-                <FiFacebook />
-              </WrapperIcon>
-              <WrapperIcon>
-                <FiInstagram />
-              </WrapperIcon>
-            </ContainerIcon>
-          </Mempelai>
+            {/* MEMPELAI COWO */}
 
-          {/* MEMPELAI COWO */}
-
-          <Mempelai>
-            <BingkaiCicle foto={Img2} />
-            <Nama>Romeo Putra</Nama>
-            <Ortu>Putra Pertama Bapak Roma & Ibu Saputri</Ortu>
-            <ContainerIcon>
-              <WrapperIcon>
-                <FiFacebook />
-              </WrapperIcon>
-              <WrapperIcon>
-                <FiInstagram />
-              </WrapperIcon>
-            </ContainerIcon>
-          </Mempelai>
-        </Middle>
+            <Mempelai>
+              <BingkaiCicle foto={Img2} />
+              <Nama>{item.nama_lengkap_cowo}</Nama>
+              <Ortu>{item.nama_ortu_cowo}</Ortu>
+              <ContainerIcon>
+                <WrapperIcon href={item.btn_fb_cowo} >
+                  <FiFacebook />
+                </WrapperIcon>
+                <WrapperIcon href={item.btn_ig_cowo} >
+                  <FiInstagram />
+                </WrapperIcon>
+              </ContainerIcon>
+            </Mempelai>
+          </Middle>
+        ))}
       </Container>
     </Background>
   );
