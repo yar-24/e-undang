@@ -5,7 +5,7 @@ import Inputan from "../components/Inputan";
 import { Background5 } from "../assets";
 import emailjs from "@emailjs/browser";
 import { Zoom } from "react-reveal";
-import { ipon, mobile } from "../../../responsive";
+import { mobile } from "../../../responsive";
 
 const Background = styled.div`
   /* background-image: url(${Background5});

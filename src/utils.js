@@ -4,12 +4,17 @@ export const colors = {
     primary: '#3C66BB',
     white: '#FFFFFF',
     secondary: '#BFDBF1',
+    pinkTerang: '#FCF2F3',
+    pinkGelap: '#FDDEED'
 }
 
 export const fonts = {
     primary: '"Abril Fatface", cursive;',
-    secondary: '"Arizonia", cursive'
+    secondary: '"Arizonia", cursive',
+    fontTema2: "'Freehand', cursive",
+    fontRoboto: "'Roboto', sans-serif"
 }
+
 
 
 export const GalleyPhotoPersonal = [

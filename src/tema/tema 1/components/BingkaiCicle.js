@@ -1,5 +1,5 @@
 import React from "react";
-import {Zoom } from "react-reveal";
+import { Zoom } from "react-reveal";
 import styled from "styled-components";
 import { Lingkaran } from "../assets/images";
 
@@ -24,14 +24,12 @@ const Bingkai = styled.img`
 
 const BingkaiCicle = ({ mb, foto }) => {
   return (
-      <Zoom>
-    <ContainerLingkaran style={{ marginBottom: mb }}>
-     
+    <Zoom>
+      <ContainerLingkaran style={{ marginBottom: mb }}>
         <Bingkai src={Lingkaran} />
- 
         <Image src={foto} />
-    </ContainerLingkaran>
-      </Zoom>
+      </ContainerLingkaran>
+    </Zoom>
   );
 };
 

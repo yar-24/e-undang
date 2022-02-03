@@ -10,9 +10,12 @@ import Lagu from "../assets/music/denny.mp3";
 import LiveStream from "./LiveStream";
 import Amplop from "./Amplop";
 import FormUcapan from "./FormUcapan";
+import Pembukaan from "./Pembukaan";
 import Navbar from "../components/Navbar";
 import { mobile } from "../../../responsive";
 import { Fade } from "react-reveal";
+import { motion } from "framer-motion";
+import { animationTwo } from "../../../animations";
 
 const Background = styled.div`
   background-image: url(${Bingkai});
@@ -44,25 +47,35 @@ const Image = styled.img`
 
 const index = () => {
   return (
-    <Background>
-      <Navbar />
-      <Music url={Lagu} />
-      <UtamaTema1 id="home" />
-      <Profile id="profile" />
-      <Akad />
-      <Galeri id="galeri" />
-      <BackgroundSambung>
-        <LiveStream />
-        <Fade left>
-          <Image src={Asset1} />
-        </Fade>
-        <Amplop />
-        <Fade left>
-          <Image src={Asset1} />
-        </Fade>
-        <FormUcapan id="ucapan" />
-      </BackgroundSambung>
-    </Background>
+    <>
+      <Background>
+      <Pembukaan />
+        <Navbar />
+        <motion.div
+          initial="out"
+          animate="in"
+          exit="out"
+          variants={animationTwo}
+        >
+          <Music url={Lagu} />
+          <UtamaTema1 id="home" />
+          <Profile id="profile" />
+          <Akad />
+          <Galeri id="galeri" />
+          <BackgroundSambung>
+            <LiveStream />
+            <Fade left>
+              <Image src={Asset1} />
+            </Fade>
+            <Amplop />
+            <Fade left>
+              <Image src={Asset1} />
+            </Fade>
+            <FormUcapan id="ucapan" />
+          </BackgroundSambung>
+        </motion.div>
+      </Background>
+    </>
   );
 };
 

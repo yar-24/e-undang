@@ -1,23 +1,11 @@
-import React from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { mobile } from "../../../responsive";
 import { colors } from "../../../utils";
-import BingkaiCicle from "../components/BingkaiCicle";
 import Partikel from "../components/Partikel";
-import { Img4, Background3 } from "../assets/images";
 import { data } from "../dataUndangan";
-
-const Background = styled.div`
-  background-image: url(${Background3});
-  background-origin: border-box;
-  background-size: cover;
-  background-position: 100%;
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
-  ${mobile({ height: "100vh" })};
-`;
+import "./pembukaan.css";
 
 const Container = styled.div`
   display: flex;
@@ -33,7 +21,15 @@ const ContainerText = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
+  margin-top: 20vh;
+  padding: 20px;
+  margin-bottom: 20px;
   color: ${colors.white};
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(17, 25, 40, 0.75);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
 `;
 
 const NamaMempelai = styled.h1`
@@ -78,13 +74,13 @@ const Button = styled.a`
 `;
 
 const Pembukaan = () => {
+  const [model, setModel] = useState(false);
   let { username } = useParams();
 
   return (
-    <Background>
+    <div className={model ? "model" : "model open"}>
       <Partikel />
       <Container>
-        <BingkaiCicle mb={-30} foto={Img4} />
         <ContainerText>
           {data.map((item) => (
             <NamaMempelai>{item.nama_pasangan}</NamaMempelai>
@@ -94,11 +90,9 @@ const Pembukaan = () => {
           <NamaLain>Bapak/Ibu/Saudara/i</NamaLain>
           <Text>kami mengundang Anda Untuk Hadir Di Acara Pernikahan Kami</Text>
         </ContainerText>
-        <Link style={{ textDecoration: "none" }} to="/contoh-tema-1">
-          <Button>Buka Undangan</Button>
-        </Link>
+        <Button onClick={() => setModel(true)}>Buka Undangan</Button>
       </Container>
-    </Background>
+    </div>
   );
 };
 

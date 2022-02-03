@@ -1,0 +1,16 @@
+import Asset1 from './asset1.jpg'
+import Bg2 from './bg2.jpg'
+import Bg3 from './bg3.jpg'
+import Bg4 from './bg4.jpg'
+import Bg5 from './bg5.jpg'
+import Bg6 from './bg6.jpg'
+import Bingkai1 from './bingkai1.png'
+import Bismillah from './bismillah.png'
+import Poto1 from './poto1.jpeg'
+import Poto2 from './poto2.jpeg'
+import Poto3 from './poto3.jpeg'
+import Poto4 from './poto4.jpeg'
+import Pita from './ribbon.png'
+import Border from './border.png'
+
+export {Asset1, Bg2, Bg3, Bg4, Bg5, Bg6, Bingkai1, Bismillah, Poto1, Poto2, Poto3, Poto4, Pita, Border}
