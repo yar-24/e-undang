@@ -15,7 +15,7 @@ import Navbar from "../components/Navbar";
 import { mobile } from "../../../responsive";
 import { Fade } from "react-reveal";
 import { motion } from "framer-motion";
-import { animationTwo } from "../../../animations";
+import {animationTwo} from '../../../animation'
 
 const Background = styled.div`
   background-image: url(${Bingkai});
@@ -49,15 +49,15 @@ const index = () => {
   return (
     <>
       <Background>
-      <Pembukaan />
+        <Pembukaan />
         <Navbar />
+        <Music url={Lagu} />
         <motion.div
           initial="out"
           animate="in"
           exit="out"
           variants={animationTwo}
         >
-          <Music url={Lagu} />
           <UtamaTema1 id="home" />
           <Profile id="profile" />
           <Akad />

@@ -29,7 +29,7 @@ const Container = styled.div`
   margin: 40% 50px 0;
   right: 0;
   top: 0;
-  z-index: 99;
+  z-index: 5;
   ${mobile({ margin: "75vh 40px 0" })};
 `;
 const Button = styled.button`
