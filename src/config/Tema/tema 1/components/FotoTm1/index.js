@@ -18,7 +18,7 @@ const FotoTm1 = () => {
   };
 
   useEffect(() => {
-    Axios.get(`http://localhost:4000/api/post/${id}`)
+    Axios.get(`http://e-undangan.netlify.app/api/post/${id}`)
       .then((res) => {
         setMultipleFiles(res.data.data.files);
       })
@@ -31,7 +31,7 @@ const FotoTm1 = () => {
   return (
     <>
       <div className={gambar ? "model open" : "model"}>
-        <img src={`http://localhost:4000/${tempimgSrc}`} alt="wkkw" />
+        <img src={`http://e-undangan.netlify.app/${tempimgSrc}`} alt="wkkw" />
         <FiX onClick={() => setGambar(false)} />
       </div>
       <div className="gallery">
@@ -45,7 +45,7 @@ const FotoTm1 = () => {
               <Fade bottom>
                 <img
                   alt="wkwk"
-                  src={`http://localhost:4000/${file.filePath}`}
+                  src={`http://e-undangan.netlify.app/${file.filePath}`}
                   style={{ width: "100%" }}
                 />
               </Fade>

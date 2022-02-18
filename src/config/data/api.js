@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = 'http://localhost:4000/api/post';
+const apiUrl = 'http://e-undangan.netlify.app/api/post';
 
 export const multipleFilesUpload = async (data, options) => {
     try {
@@ -21,7 +21,7 @@ export const getMultipleFiles = async () => {
 
 export const updateToAPI = async (data, options, id) => {
     try {
-        await axios.put(`http://localhost:4000/api/post/${id}`, data, options);
+        await axios.put(`http://e-undangan.netlify.app/api/post/${id}`, data, options);
     } catch (error) {
         throw error;
     }

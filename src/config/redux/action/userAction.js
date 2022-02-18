@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 export const setDataUndang = () => (dispatch) => {
-    Axios.get('http://localhost:4000/api/posts')
+    Axios.get('http://e-undangan.netlify.app/api/posts')
     .then(result => {
         const responseAPI = result;
 

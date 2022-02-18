@@ -49,7 +49,7 @@ const InputanCreate = () => {
   useEffect(() => {
     if (id) {
       setIsUpdate(true);
-      Axios.get(`http://localhost:4000/api/post/${id}`)
+      Axios.get(`http://e-undangan.netlify.app/api/post/${id}`)
         .then((res) => {
           const data = res.data.data;
           console.log("res :", data);

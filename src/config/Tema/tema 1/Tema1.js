@@ -50,7 +50,7 @@ const Tema1 = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    Axios.get(`http://localhost:4000/api/post/${id}`)
+    Axios.get(`http://e-undangan.netlify.app/api/post/${id}`)
       .then((res) => {
         setData(res.data.data);
       })
