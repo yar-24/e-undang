@@ -1,0 +1,19 @@
+.pembukaan {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background-color: rgba(0, 0, 0,0.9);
+  transition: opacity 0.4s ease, visibility 0.4s ease,
+    transform 0.5s ease-in-out;
+  z-index: 99;
+  transform: translateY(-100%);
+}
+
+.pembukaan.open {
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1);
+}

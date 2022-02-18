@@ -1,10 +1,12 @@
-import RouterIndex from "./RouterIndex";
+import RouterScreen from "./RouterScreen";
+import store from "./config/redux/store";
+import {Provider} from 'react-redux'
 
 function App() {
   return (
-    <div>
-      <RouterIndex />
-    </div>
+    <Provider store={store}>
+      <RouterScreen/>
+    </Provider>
   );
 }
 
