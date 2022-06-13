@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { Img4, Awan, Bunga1 } from '../../assets';
-import {ButtonTm1} from '../../components';
+import { Awan, Bunga1 } from "../../assets";
+import { ButtonTm1 } from "../../components";
 import { SiGooglemaps } from "react-icons/si";
-import { colors, fonts } from '../../../../../utils';
-import { ipon, mobile } from '../../../../../responsive';
+import { colors, fonts } from "../../../../../utils";
+import { ipon, mobile } from "../../../../../responsive";
 import { Bounce, Fade } from "react-reveal";
+import { useSelector } from "react-redux";
 
 const Background = styled.div``;
 const ImgBunga = styled.img`
@@ -102,57 +103,60 @@ const Surat = styled.p`
   ${mobile({ fontSize: "12px" })};
 `;
 
-const KeempatTm1 = (props) => {
+const KeempatTm1 = () => {
 
-  const {tglAkad, jamAkad, almtAkad, tglResepsi, jamResepsi, almtResepsi, linkGmaps} = props
+  const { goals, isLoading, isError, message } = useSelector(
+    (state) => state.goals
+  );
 
   return (
-    <Background>
-      <Fade left>
-        <ImgBunga src={Bunga1} />
-      </Fade>
-      <Image src={Img4} />
-        <Bounce bottom cascade>
-          <Container>
-            <ContainerAkad>
-              <AkadNikah>
-                <Title>Akad Nikah</Title>
-                <Tanggal>{tglAkad}</Tanggal>
-                <Pukul>Pukul {jamAkad}</Pukul>
-                <Alamat>
-                  Alamat : {almtAkad}
-                </Alamat>
-              </AkadNikah>
-              <AkadNikah>
-                <Title>Resepsi nikah</Title>
-                <Tanggal>{tglResepsi}</Tanggal>
-                <Pukul>Pukul {jamResepsi}</Pukul>
-                <Alamat>
-                  Alamat : {almtResepsi}
-                </Alamat>
-              </AkadNikah>
-            </ContainerAkad>
-            <ButtonTm1
-              width={"250px"}
-              label="Kunjungi Lokasi Via Gmaps"
-              icon={<SiGooglemaps />}
-              link={linkGmaps}
-            />
-          </Container>
-        </Bounce>
-      <BAwan>
-        <CountainerText>
-          <Text>
-            "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan
-            untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung
-            dan merasa tenteram kepadanya, dan jadikan-Nya diantaramu rasa kasih
-            dan sayang. Sesungguhnya pada yang demikian itu benar-brnar terdapat
-            tanda-tanda bagi kamu yang berfikir."
-          </Text>
-          <Surat>(Q.S AR RUM : 21)</Surat>
-        </CountainerText>
-      </BAwan>
-    </Background>
+    <>
+      {goals.map((item) => (
+        <Background key={item._id}>  
+          <Fade left>
+            <ImgBunga src={Bunga1} />
+          </Fade>
+          <Image src={item.photoBerdua} />
+          <Bounce bottom cascade>
+            <Container>
+              <ContainerAkad>
+                <AkadNikah>
+                  <Title>Akad Nikah</Title>
+                  <Tanggal>{item.tglAkad}</Tanggal>
+                  <Pukul>Pukul {item.waktuAkad}</Pukul>
+                  <Alamat>Alamat : {item.alamatAkad}</Alamat>
+                </AkadNikah>
+                <AkadNikah>
+                  <Title>Resepsi nikah</Title>
+                  <Tanggal>{item.tglResepsi}</Tanggal>
+                  <Pukul>Pukul {item.waktuResepsi}</Pukul>
+                  <Alamat>Alamat : {item.alamatResepsi}</Alamat>
+                </AkadNikah>
+              </ContainerAkad>
+              <ButtonTm1
+                width={"250px"}
+                label="Kunjungi Lokasi Via Gmaps"
+                icon={<SiGooglemaps />}
+                link={item.linkGmaps}
+              />
+            </Container>
+          </Bounce>
+          <BAwan>
+            <CountainerText>
+              <Text>
+                "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan
+                untukmu isteri-isteri dari jenismu sendiri, supaya kamu
+                cenderung dan merasa tenteram kepadanya, dan jadikan-Nya
+                diantaramu rasa kasih dan sayang. Sesungguhnya pada yang
+                demikian itu benar-brnar terdapat tanda-tanda bagi kamu yang
+                berfikir."
+              </Text>
+              <Surat>(Q.S AR RUM : 21)</Surat>
+            </CountainerText>
+          </BAwan>
+        </Background>
+      ))}
+    </>
   );
 };
 

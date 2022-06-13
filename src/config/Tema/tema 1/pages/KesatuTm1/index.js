@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { mobile } from '../../../../../responsive';
-import { colors } from '../../../../../utils';
-import { Partikel} from '../../../../../componentsApp';
-import './kesatuTm1.css'
+import { mobile } from "../../../../../responsive";
+import { colors } from "../../../../../utils";
+import { Partikel } from "../../../../../componentsApp";
+import "./kesatuTm1.css";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   display: flex;
@@ -20,7 +21,7 @@ const ContainerText = styled.div`
   text-align: center;
   padding: 20px;
   width: 100%;
-  height: 60vh;
+  height: 100%;
   color: ${colors.white};
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -30,20 +31,24 @@ const ContainerText = styled.div`
 `;
 
 const NamaMempelai = styled.h1`
-margin-bottom: -40px;
   color: ${colors.secondary};
   font-family: "Abril Fatface", cursive;
   font-size: 46px;
+  text-transform: capitalize ;
+  margin: 0;
+  ${mobile({ fontSize: "28px" })};
 `;
 
 const Kepada = styled.h3`
-  margin: 60px 0px 0px;
+  margin: 10px 0px 0px;
 `;
 
 const NamaTamu = styled.h1`
   color: ${colors.secondary};
   font-family: "Abril Fatface", cursive;
   font-size: 36px;
+  text-transform: capitalize ;
+  ${mobile({ fontSize: "24px" })};
 `;
 
 const NamaLain = styled.h3`
@@ -71,23 +76,33 @@ const Button = styled.a`
   }
 `;
 
-const KesatuTm1 = ({nama}) => {
+const KesatuTm1 = () => {
   const [pembukaan, setPembukaan] = useState(false);
-  let { username } = useParams();
+  let { namaTamu } = useParams();
+
+  const { goals} = useSelector(
+    (state) => state.goals
+  );
 
   return (
     <div className={pembukaan ? "pembukaan" : "pembukaan open"}>
       <Partikel />
-      <Container>
-        <ContainerText>
-            <NamaMempelai>{nama}</NamaMempelai>
-          <Kepada>Kepada</Kepada>
-          <NamaTamu>{username}</NamaTamu>
-          <NamaLain>Bapak/Ibu/Saudara/i</NamaLain>
-          <Text>kami mengundang Anda Untuk Hadir Di Acara Pernikahan Kami</Text>
-        <Button onClick={() => setPembukaan(true)}>Buka Undangan</Button>
-        </ContainerText>
-      </Container>
+      {goals.map((item) => (
+        <Container key={item._id}>
+          <ContainerText>
+            <NamaMempelai>{item.namaPglCowo}</NamaMempelai>
+            <h1 style={{ margin: 0 }}>&</h1>
+            <NamaMempelai>{item.namaPglCewe}</NamaMempelai>
+            <Kepada>Kepada</Kepada>
+            <NamaTamu>{namaTamu}</NamaTamu>
+            <NamaLain>Bapak/Ibu/Saudara/i</NamaLain>
+            <Text>
+              kami mengundang Anda Untuk Hadir Di Acara Pernikahan Kami
+            </Text>
+            <Button onClick={() => setPembukaan(true)}>Buka Undangan</Button>
+          </ContainerText>
+        </Container>
+      ))}
     </div>
   );
 };

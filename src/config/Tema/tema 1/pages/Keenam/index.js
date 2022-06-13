@@ -6,6 +6,7 @@ import { Instagram, Yt, Draw, Background5 } from "../../assets";
 import { ipon, mobile } from "../../../../../responsive";
 import { colors, fonts } from "../../../../../utils";
 import { Bounce } from "react-reveal";
+import { useSelector } from "react-redux";
 
 const Background = styled.div`
   /* background-image: url(${Background5});
@@ -60,47 +61,52 @@ const Image = styled.img`
   margin: 10px 0 10px;
 `;
 
-const KeenamTm1 = (props) => {
-  const { linkIg, linkYt } = props;
+const KeenamTm1 = () => {
+
+  const { goals, isLoading, isError, message } = useSelector(
+    (state) => state.goals
+  );
 
   return (
     <Background>
-      <Bounce bottom cascade>
-        <Container>
-          <ContainerText>
-            <Title>Live Streaming</Title>
-            <Text>
-              kami mengundang Bapa/Ibu/Saudara/i untuk menyaksikan Pernikahan
-              kami secara Virtual yang disiarkan langsing melalui Sosial media
-              dibawah ini
-            </Text>
-          </ContainerText>
-          <ContainerLive>
-            <TitleLive>Intagram</TitleLive>
-            <Image src={Instagram} />
-            <ButtonTm1
-              padding={"0px"}
-              width={"150px"}
-              label="Klik Disini"
-              icon={<BsCameraVideoFill />}
-              link={linkIg}
-            />
-          </ContainerLive>
+      {goals.map((item) => (
+        <Bounce bottom cascade key={item._id}>
+          <Container>
+            <ContainerText>
+              <Title>Live Streaming</Title>
+              <Text>
+                kami mengundang Bapa/Ibu/Saudara/i untuk menyaksikan Pernikahan
+                kami secara Virtual yang disiarkan langsing melalui Sosial media
+                dibawah ini
+              </Text>
+            </ContainerText>
+            <ContainerLive>
+              <TitleLive>Intagram</TitleLive>
+              <Image src={Instagram} />
+              <ButtonTm1
+                padding={"0px"}
+                width={"150px"}
+                label="Klik Disini"
+                icon={<BsCameraVideoFill />}
+                link={item.linkLive}
+              />
+            </ContainerLive>
 
-          <Image src={Draw} />
-          <ContainerLive>
-            <TitleLive>Youtube</TitleLive>
-            <Image src={Yt} />
-            <ButtonTm1
-              padding={"0px"}
-              width={"150px"}
-              label="Klik Disini"
-              icon={<BsCameraVideoFill />}
-              link={linkYt}
-            />
-          </ContainerLive>
-        </Container>
-      </Bounce>
+            <Image src={Draw} />
+            <ContainerLive>
+              <TitleLive>Youtube</TitleLive>
+              <Image src={Yt} />
+              <ButtonTm1
+                padding={"0px"}
+                width={"150px"}
+                label="Klik Disini"
+                icon={<BsCameraVideoFill />}
+                link={item.linkLive}
+              />
+            </ContainerLive>
+          </Container>
+        </Bounce>
+      ))}
     </Background>
   );
 };

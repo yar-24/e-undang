@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   KesatuTm1,
   KeduaTm1,
@@ -10,12 +10,14 @@ import {
   KedelapanTm1,
 } from "./pages";
 import styled from "styled-components";
-import { Bingkai, Background5, Asset1, Lagu } from "./assets";
+import { Bingkai, Background5, Asset1 } from "./assets";
 import { mobile } from "../../../responsive";
 import { Fade } from "react-reveal";
-import { MusicTm1, NavbarTm1 } from "./components";
-import { useParams } from "react-router-dom";
-import Axios from "axios";
+import { MusikTm1, NavbarTm1 } from "./components";
+import { useDispatch, useSelector } from "react-redux";
+import { getGoals } from "../../redux/features/goals/goalSlice";
+import { Loading } from "../../../componentsApp";
+
 
 const Background = styled.div`
   background-image: url(${Bingkai});
@@ -24,7 +26,9 @@ const Background = styled.div`
   background-position: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center ;
   align-items: center;
+  max-width: 1440px ;
 `;
 
 const BackgroundSambung = styled.div`
@@ -34,6 +38,7 @@ const BackgroundSambung = styled.div`
   position: relative;
   background-position: 100%;
   width: 100%;
+  padding-bottom: 5rem;
 `;
 
 const Image = styled.img`
@@ -45,41 +50,47 @@ const Image = styled.img`
 `;
 
 const Tema1 = () => {
-  const [data, setData] = useState({});
+  const { goals, isLoading, isError, message } = useSelector(
+    (state) => state.goals
+  );
 
-  const { id } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    Axios.get(`http://e-undangan.netlify.app/api/post/${id}`)
-      .then((res) => {
-        setData(res.data.data);
-      })
-      .catch((err) => {
-        console.log("error", err);
-      });
-  }, [id]);
+
+    dispatch(getGoals());
+  }, [isError, message, dispatch]);
+
+  if (isLoading) {
+    return <Loading type={"balls"} color={"#FFFFFF"} height={"20%"} width={"20%"} />;
+  }
 
   return (
-    <Background>
-      <KesatuTm1 nama={data.nama} />
-      <NavbarTm1 />
-      <MusicTm1 url={Lagu} />
-      <KeduaTm1 page="home" />
-      <KetigaTm1 page="profile" />
-      <KeempatTm1 />
-      <KelimaTm1 page="galeri" />;
-      <BackgroundSambung>
-        <KeenamTm1 />
-        <Fade left>
-          <Image src={Asset1} />
-        </Fade>
-        <KetujuhTm1 />
-        <Fade left>
-          <Image src={Asset1} />
-        </Fade>
-        <KedelapanTm1 page="ucapan" />
-      </BackgroundSambung>
-    </Background>
+    <>
+      {goals.map((item) => (
+        <Background key={item._id}>
+          <KesatuTm1 />
+          <NavbarTm1 />
+          <MusikTm1 music={item.music} />
+          {/* <MusicTm1 url={data.music} /> */}
+          <KeduaTm1 page="home" />
+          <KetigaTm1 page="profile" />
+          <KeempatTm1 />
+          <KelimaTm1 page="galeri" files={item.files} idYt={item.idYT} />
+          <BackgroundSambung>
+            <KeenamTm1 />
+            <Fade left>
+              <Image src={Asset1} />
+            </Fade>
+            <KetujuhTm1/>
+            <Fade left>
+              <Image src={Asset1} />
+            </Fade>
+            <KedelapanTm1 page="ucapan" />
+          </BackgroundSambung>
+        </Background>
+      ))}
+    </>
   );
 };
 

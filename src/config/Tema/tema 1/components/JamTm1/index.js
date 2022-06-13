@@ -82,7 +82,7 @@ function JamTm1() {
     return () => {
       clearInterval(someref);
     };
-  }, []);
+  });
 
   return (
     <Timer className="timer">

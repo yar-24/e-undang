@@ -37,7 +37,6 @@ const NavbarTm1 = () => {
         to="home"
         smooth={true}
         duration={500}
-        spy={true}
         exact="true"
       >
         <Image src={Love} />
@@ -47,7 +46,6 @@ const NavbarTm1 = () => {
         to="profile"
         smooth={true}
         duration={500}
-        spy={true}
         exact="true"
       >
         <Image src={Couple} />
@@ -57,7 +55,6 @@ const NavbarTm1 = () => {
         to="galeri"
         smooth={true}
         duration={500}
-        spy={true}
         exact="true"
       >
         <Image src={Album} />
@@ -67,7 +64,6 @@ const NavbarTm1 = () => {
         to="ucapan"
         smooth={true}
         duration={500}
-        spy={true}
         exact="true"
       >
         <Image src={LoveLetter} />

@@ -15,6 +15,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 15px ;
   ${mobile({ marginTop: "-10px" })};
 `;
 const Text = styled.h1`
@@ -32,7 +33,7 @@ const ContainerFoto = styled.div`
   ${mobile({ height: "50vh" })};
 `;
 
-const KelimaTm1 = ({ page, keys, img, idYt }) => {
+const KelimaTm1 = ({ page, keys, files, idYt }) => {
   const opts = {
     height: "200",
     width: "330",
@@ -47,7 +48,7 @@ const KelimaTm1 = ({ page, keys, img, idYt }) => {
       <Container id={page}>
         <Text>Galeri Kami</Text>
         <ContainerFoto>
-          <FotoTm1/>
+          <FotoTm1 galeri={files} />
         </ContainerFoto>
           <Bounce left>
             <YouTube videoId={idYt} opts={opts} />

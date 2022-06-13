@@ -1,11 +1,12 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { mobile } from '../../../../../responsive';
-import { ShopeePay, Bri } from '../../assets';
+import { mobile } from "../../../../../responsive";
+import { ShopeePay, Bri } from "../../assets";
 import { FaCopy } from "react-icons/fa";
-import { colors, fonts } from '../../../../../utils';
-import {ButtonTm1} from '../../components';
+import { colors, fonts } from "../../../../../utils";
+import { ButtonTm1 } from "../../components";
 import { Bounce } from "react-reveal";
+import { useSelector } from "react-redux";
 
 const Background = styled.div``;
 const Container = styled.div`
@@ -57,66 +58,74 @@ const Image = styled.img`
 
 const ContainerButton = styled.div``;
 
-const KetujuhTm1 = (props) => {
+const KetujuhTm1 = () => {
   const [Bridone, BrisetDone] = useState(false);
   const [Spdone, SpsetDone] = useState(false);
 
-  const {noBank, anBank, noTlpShoppe, anShoppe} = props
+  const { goals} = useSelector(
+    (state) => state.goals
+  );
+
 
   return (
-    <Background>
-      <Bounce bottom cascade>
-        <Container>
-          <ContainerText>
-            <Title>Amplop Digital</Title>
-            <Text>
-              Doa restu Anda merupakan karunia yang sangat berarti bagi kami.
-            </Text>
-            <Text>
-              Dan jika memberi adalah ungkapan tanda kasih Anda, Anda dapat
-              memberi kado secara cashless dengan mengirim amplop digital secara
-              transfer pada akun di bawah ini :
-            </Text>
-          </ContainerText>
+    <>
+      {goals.map((item) => (
+        <Background key={item._id}>
+          <Bounce bottom cascade>
+            <Container>
+              <ContainerText>
+                <Title>Amplop Digital</Title>
+                <Text>
+                  Doa restu Anda merupakan karunia yang sangat berarti bagi
+                  kami.
+                </Text>
+                <Text>
+                  Dan jika memberi adalah ungkapan tanda kasih Anda, Anda dapat
+                  memberi kado secara cashless dengan mengirim amplop digital
+                  secara transfer pada akun di bawah ini :
+                </Text>
+              </ContainerText>
 
-            <ContainerCard>
-              <Image src={Bri} />
-              <Text>No. Rekening : {noBank}</Text>
-              <Hr />
-              <Text>A/n {anBank}</Text>
-              <ContainerButton>
-                <ButtonTm1
-                  padding={"0px"}
-                  width={"150px"}
-                  label={(Bridone && "Copy Berhasil") || "Copy Text"}
-                  icon={<FaCopy />}
-                  onClick={() =>
-                    BrisetDone(navigator.clipboard.writeText({noBank}))
-                  }
-                />
-              </ContainerButton>
-            </ContainerCard>
-  
-            <ContainerCard>
-              <Image src={ShopeePay} />
-              <Text>No. Telp : {noTlpShoppe}</Text>
-              <Hr />
-              <Text>A/n {anShoppe}</Text>
-              <ContainerButton>
-                <ButtonTm1
-                  padding={"0px"}
-                  width={"150px"}
-                  label={(Spdone && "Copy Berhasil") || "Copy Text"}
-                  icon={<FaCopy />}
-                  onClick={() =>
-                    SpsetDone(navigator.clipboard.writeText({noTlpShoppe}))
-                  }
-                />
-              </ContainerButton>
-            </ContainerCard>
-        </Container>
-      </Bounce>
-    </Background>
+              <ContainerCard>
+                <Image src={Bri} />
+                <Text>No. Rekening : {item.noRek}</Text>
+                <Hr />
+                <Text>A/n {item.atasNamaBank}</Text>
+                <ContainerButton>
+                  <ButtonTm1
+                    padding={"0px"}
+                    width={"150px"}
+                    label={(Bridone && "Copy Berhasil") || "Copy Text"}
+                    icon={<FaCopy />}
+                    onClick={() =>
+                      BrisetDone(navigator.clipboard.writeText(item.noRek))
+                    }
+                  />
+                </ContainerButton>
+              </ContainerCard>
+
+              <ContainerCard>
+                <Image src={ShopeePay} />
+                <Text>No. Telp : {item.noHp}</Text>
+                <Hr />
+                <Text>A/n {item.atasNamaDompet}</Text>
+                <ContainerButton>
+                  <ButtonTm1
+                    padding={"0px"}
+                    width={"150px"}
+                    label={(Spdone && "Copy Berhasil") || "Copy Text"}
+                    icon={<FaCopy />}
+                    onClick={() =>
+                      SpsetDone(navigator.clipboard.writeText( item.noHp ))
+                    }
+                  />
+                </ContainerButton>
+              </ContainerCard>
+            </Container>
+          </Bounce>
+        </Background>
+      ))}
+    </>
   );
 };
 

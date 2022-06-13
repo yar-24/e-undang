@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Tombol } from "..";
+import { mobile } from "../../../responsive";
 
 const CardContainer = styled.div`
   display: flex;
@@ -12,6 +13,8 @@ const CardContainer = styled.div`
   text-align: center;
   border-radius: 10px;
   margin: 20px;
+  color: white;
+  ${mobile({width: "50%"})};
 `;
 const Name = styled.h1``;
 const Tanggal = styled.p``;
@@ -37,7 +40,7 @@ const Delete = styled.p`
 `;
 
 const CardUser = (props) => {
-  const { nama, date } = props;
+  const { nama, date, onDelete } = props;
 
   return (
     <>
@@ -47,10 +50,7 @@ const CardUser = (props) => {
           <Link to={`/create-undangan/${props.id}`}>
             <Edit>Edit</Edit>
           </Link>
-          |
-          <Link to={`/create-undangan/${props.id}`}>
-            <Delete>Delete</Delete>
-          </Link>
+          |<Delete onClick={() => onDelete(props.id)}>Delete</Delete>
         </ContainerEdit>
         <Tanggal>{date}</Tanggal>
         <Link to={`/:username/${props.nama}/${props.id}`}>

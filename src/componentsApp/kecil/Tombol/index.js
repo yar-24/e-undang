@@ -11,6 +11,10 @@ border: none;
 color: white;
 background-color: ${colors.primary};
 cursor: pointer;
+&:disabled{
+  color: red ;
+  cursor: not-allowed;
+}
 :hover{
   color: black;
 background-color: ${colors.secondary};

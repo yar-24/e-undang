@@ -23,7 +23,7 @@ const Bingkai = styled.img`
   z-index: 3;
 `;
 
-const BingkaiTm1 = ({ mb, foto }) => {
+const BingkaiTm1 = ({ mb, foto, id }) => {
   return (
     <Zoom>
       <ContainerLingkaran style={{ marginBottom: mb }}>

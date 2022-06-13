@@ -1,4 +1,19 @@
-import InputanCreate from "./InputanCreate";
-import FormComments from "./comments";
+import RightHomePage from "./RightHomePage";
+import LeftHomePage from "./LeftHomePage";
+import Footer from "./Footer";
+import DashboardUser from "./DashboardUser";
+import DasboardPilihTema from "./DashboardPilihTema";
+import DasboardPilihHarga from "./DashboardDaftarHarga";
+import DashboardPremium from "./DashboardPremium";
+import DasboardProfile from "./DashboardProfile";
 
-export {InputanCreate, FormComments}
+export {
+  RightHomePage,
+  LeftHomePage,
+  Footer,
+  DashboardUser,
+  DasboardPilihTema,
+  DasboardPilihHarga,
+  DashboardPremium,
+  DasboardProfile,
+};

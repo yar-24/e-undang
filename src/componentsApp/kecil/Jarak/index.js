@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Jarak = ({height}) => {
-  return <div style={{height:height}}></div>;
+const Jarak = ({height,width, backgroundColor}) => {
+  return <div style={{height:height, width:width, backgroundColor:backgroundColor}}></div>;
 };
 
 export default Jarak;

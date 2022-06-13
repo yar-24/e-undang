@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { colors, fonts } from "../../../../../utils";
-import { Img2, Img3, Bismillah, Bingkai } from '../../assets';
+import { Bismillah, Bingkai } from "../../assets";
 import { BingkaiTm1 } from "../../components";
 import { FiFacebook, FiInstagram } from "react-icons/fi";
 import { mobile } from "../../../../../responsive";
 import { Fade } from "react-reveal";
+import { useSelector } from "react-redux";
 
 const Background = styled.section`
   background-image: url(${Bingkai});
@@ -59,12 +60,14 @@ const Mempelai = styled.div`
 const Nama = styled.h3`
   font-family: ${fonts.secondary};
   font-size: 30px;
+  text-transform: capitalize ;
   margin: 0 0 5px;
 `;
 
 const Ortu = styled.p`
   font-family: ${fonts.primary};
   font-size: 15px;
+  text-transform: capitalize ;
 `;
 
 const ContainerIcon = styled.div`
@@ -93,39 +96,43 @@ const WrapperIcon = styled.a`
   }
 `;
 
-const KetigaTm1 = (props) => {
+const KetigaTm1 = ({page}) => {
 
-  const {namaLkpWanita, namaOrtuWanita, linkFbWanita, linkIgWanita, namaLkpPria, namaOrtuPria, linkFbPria, linkIgPria, page} = props
+  const { goals } = useSelector(
+    (state) => state.goals
+  );
 
   return (
     <Background id={page}>
-      <Container>
-        <Top>
-          <Fade bottom>
-            <Image src={Bismillah} />
-            <Salam>Assalamu’alaikum Wr Wb</Salam>
-            <Text>
-              Maha suci Allah yang telah menciptakan mahluk-Nya
-              berpasang-pasangan. Ya Allah, perkenankanlah kami merangkai kasih
-              sayang yang Kau ciptakan diantara kami untuk mengikuti Sunnah
-              Rasul-Mu dalam rangka membentuk kelurga yang sakinah, mawaddah,
-              warahmah.
-            </Text>
-          </Fade>
-        </Top>
-          <Middle >
+      {goals.map((item) => (
+        <Container key={item._id}>
+          <Top>
+            <Fade bottom>
+              <Image src={Bismillah} />
+              <Salam>Assalamu’alaikum Wr Wb</Salam>
+              <Text>
+                Maha suci Allah yang telah menciptakan mahluk-Nya
+                berpasang-pasangan. Ya Allah, perkenankanlah kami merangkai
+                kasih sayang yang Kau ciptakan diantara kami untuk mengikuti
+                Sunnah Rasul-Mu dalam rangka membentuk kelurga yang sakinah,
+                mawaddah, warahmah.
+              </Text>
+            </Fade>
+          </Top>
+          <Middle>
             {/* MEMPELAI CEWE */}
 
             <Mempelai>
-              <BingkaiTm1 foto={Img3} />
-              <Nama>{namaLkpWanita}</Nama>
-              <Ortu>{namaOrtuWanita}</Ortu>
-
+              <BingkaiTm1 foto={item.photoCewe} />
+              <Nama>{item.namaLkpCewe}</Nama>
+              <Ortu>
+                {item.urutanAnakCewe} Bapak {item.namaAyahCewe} & Ibu {item.namaIbuCewe}
+              </Ortu>
               <ContainerIcon>
-                <WrapperIcon href={linkFbWanita}>
+                <WrapperIcon href={item.linkFBCewe}>
                   <FiFacebook />
                 </WrapperIcon>
-                <WrapperIcon href={linkIgWanita}>
+                <WrapperIcon href={item.linkIGCewe}>
                   <FiInstagram />
                 </WrapperIcon>
               </ContainerIcon>
@@ -134,20 +141,23 @@ const KetigaTm1 = (props) => {
             {/* MEMPELAI COWO */}
 
             <Mempelai>
-              <BingkaiTm1 foto={Img2} />
-              <Nama>{namaLkpPria}</Nama>
-              <Ortu>{namaOrtuPria}</Ortu>
+              <BingkaiTm1 foto={item.photoCowo} />
+              <Nama>{item.namaLkpCowo}</Nama>
+              <Ortu>
+                {item.urutanAnakCowo} Bapak {item.namaAyahCowo} & Ibu {item.namaIbuCowo}
+              </Ortu>
               <ContainerIcon>
-                <WrapperIcon href={linkFbPria}>
+                <WrapperIcon href={item.linkFBCowo}>
                   <FiFacebook />
                 </WrapperIcon>
-                <WrapperIcon href={linkIgPria}>
+                <WrapperIcon href={item.linkIGCowo}>
                   <FiInstagram />
                 </WrapperIcon>
               </ContainerIcon>
             </Mempelai>
           </Middle>
-      </Container>
+        </Container>
+      ))}
     </Background>
   );
 };
