@@ -31,28 +31,31 @@ const Input = styled.input`
   width: 100%;
   padding: 10px;
   border: none;
-  outline: none;
+  outline:none;
   font-size: 18px;
   transition: all 1s ease;
-  text-transform: lowercase;
-  ::placeholder {
+  :placeholder {
     font-weight: 500;
     font-family: ${fonts.montserrat};
     color: ${colors.abuGelap};
   }
+  ::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
   ${mobile({ fontSize: "12px" })}
 `;
 
 const Inputan = (props) => {
 
-  const {style, type, label, onChange, value, placeholder, ...rest} = props
+  const {style, type, label, onChange,styleContainer,styleLabel,  value, placeholder, ...rest} = props
 
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
 
   return (
-    <Container>
-      <Text>{label}</Text>
+    <Container style={styleContainer}>
+      <Text style={styleLabel}>{label}</Text>
       <InputContainer>
         <Input
           {...rest}

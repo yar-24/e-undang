@@ -33,7 +33,7 @@ const Container = styled.div`
     position: "initial",
     flexDirection: "column",
     width: "80%",
-    height: "50%",
+    height: "70%",
     marginLeft: 0,
     margin: "15vh 20px 0",
     padding: "0px 20px 0px",
@@ -63,6 +63,7 @@ const Bottom = styled.div`
   text-align: left;
   width: 100%;
   margin: 20px 0 40px;
+  ${mobile({ margin: "0"})}
 `;
 
 const Right = styled.div`
@@ -87,7 +88,7 @@ const Button = styled.div`
   font-weight: 600;
   background-color: ${colors.btnSecondary};
   cursor: pointer;
-  ${mobile({ fontSize: "12px", width: "30vw", padding: 0 })}
+  ${mobile({ fontSize: "12px", width: "30vw", padding: 0, marginTop: "20px" })}
 `;
 
 const EditProfile = ({ width }) => {

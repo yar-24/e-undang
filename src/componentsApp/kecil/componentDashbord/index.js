@@ -7,6 +7,7 @@ import PilihTemaDashboard from "./PilihTemaDashboard";
 import PilihHargaDashboard from "./PilihHargaDashboard";
 import PremiumDashboard from "./PreimumDashboard";
 import EditProfile from "./EditProfile";
+import Notification from "./Notification";
 
 export {
   NavDasboard,
@@ -17,5 +18,6 @@ export {
   PilihTemaDashboard,
   PilihHargaDashboard,
   PremiumDashboard,
-  EditProfile
+  EditProfile,
+  Notification
 };

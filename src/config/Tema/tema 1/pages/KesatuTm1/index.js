@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, {useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { mobile } from "../../../../../responsive";
 import { colors } from "../../../../../utils";
 import { Partikel } from "../../../../../componentsApp";
 import "./kesatuTm1.css";
-import { useSelector } from "react-redux";
 
 const Container = styled.div`
   display: flex;
@@ -76,23 +75,18 @@ const Button = styled.a`
   }
 `;
 
-const KesatuTm1 = () => {
+const KesatuTm1 = ({namaPglCowo, namaPglCewe}) => {
   const [pembukaan, setPembukaan] = useState(false);
   let { namaTamu } = useParams();
-
-  const { goals} = useSelector(
-    (state) => state.goals
-  );
 
   return (
     <div className={pembukaan ? "pembukaan" : "pembukaan open"}>
       <Partikel />
-      {goals.map((item) => (
-        <Container key={item._id}>
+        <Container>
           <ContainerText>
-            <NamaMempelai>{item.namaPglCowo}</NamaMempelai>
+            <NamaMempelai>{namaPglCowo}</NamaMempelai>
             <h1 style={{ margin: 0 }}>&</h1>
-            <NamaMempelai>{item.namaPglCewe}</NamaMempelai>
+            <NamaMempelai>{namaPglCewe}</NamaMempelai>
             <Kepada>Kepada</Kepada>
             <NamaTamu>{namaTamu}</NamaTamu>
             <NamaLain>Bapak/Ibu/Saudara/i</NamaLain>
@@ -102,7 +96,6 @@ const KesatuTm1 = () => {
             <Button onClick={() => setPembukaan(true)}>Buka Undangan</Button>
           </ContainerText>
         </Container>
-      ))}
     </div>
   );
 };

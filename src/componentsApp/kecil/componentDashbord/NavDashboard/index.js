@@ -1,13 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { LogoSvg } from "../../../../img";
-import { fonts, mobile } from "../../../../utils";
+import { colors, fonts, mobile } from "../../../../utils";
 import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
+import { AiOutlineShopping } from "react-icons/ai";
 import Dropdown from "../../Navbar/Dropdown";
 import Toggle from "../../Toggle.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ThemeContext } from "../../../../context";
+import axios from "axios";
 
 const Container = styled.div`
   display: flex;
@@ -21,6 +23,7 @@ const Container = styled.div`
   height: 10vh;
   background-color: #fff;
   filter: drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.25));
+  ${mobile({ height: "50px" })}
 `;
 
 const Left = styled.div`
@@ -57,6 +60,18 @@ const Right = styled.div`
   align-items: center;
   justify-content: right;
 `;
+
+const ContainerPayment = styled.div`
+display: flex ;
+justify-content:center ;
+align-items: center ;
+margin-right:  20px;
+width: 30px ;
+height: 30px;
+border-radius: 50% ;
+background-color: ${colors.btnSecondary} ;
+cursor: pointer;
+`
 
 const WrapperRight = styled.div`
   display: flex;
@@ -97,6 +112,9 @@ const ContainerMenuUser = styled.div`
 const NavDasboard = (props) => {
   const { handleClicks, clicks, handleClickMenu, click } = props;
 
+  const [orderId, setOrderId] = useState("");
+  
+
   const navigate = useNavigate();
 
   const { user } = useSelector((state) => state.auth);
@@ -107,6 +125,26 @@ const NavDasboard = (props) => {
 
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/order",{
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    })
+    .then((res) => {
+      const id = res.data[0].id
+      setOrderId(id)
+    })
+    .catch((err) => {
+      // console.log("err");
+    })
+  })
+
+  const handleNotification = () => {
+    navigate(`/notification/${orderId}`)
+  }
+
 
   return (
     <Container
@@ -147,19 +185,21 @@ const NavDasboard = (props) => {
         </ContainerLogo>
       </Left>
       <Right>
+      {orderId ? 
+        <ContainerPayment onClick={handleNotification}>
+          <AiOutlineShopping size={20} color={"#ffffff"} />
+        </ContainerPayment> : null
+      }
         <WrapperRight>
           <Username>{user.name}</Username>
           <ContainerImg onClick={handleProfile}>
-            {user.idPicProfile ? (  
+            {user.idPicProfile ? (
               <Image
                 src={"https://i.ibb.co/MBtjqXQ/no-avatar.gif"}
                 alt="userpicture"
               />
             ) : (
-              <Image
-                src={user.picProfile}
-                alt="userpicture"
-              />
+              <Image src={user.picProfile} alt="userpicture" />
             )}
           </ContainerImg>
           <ContainerMenuUser onClick={handleClickMenu}>

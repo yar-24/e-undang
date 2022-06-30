@@ -1,6 +1,4 @@
-import axios from "axios";
-
-const API_URL = "http://localhost:5000/api/goals/";
+import {axiosInstance} from "../../../../config"
 
 // Create new goal
 const createGoal = async (goalData, token) => {
@@ -13,14 +11,14 @@ const createGoal = async (goalData, token) => {
     },
   };
 
-  const response = await axios
-    .post(API_URL, goalData, config)
-    // .then((res) => {
-    //   console.log("sukses");
-    // })
-    // .catch((err) => {
-    //   console.log("err");
-    // });
+  const response = await axiosInstance
+    .post("/goals", goalData, config)
+    .then((res) => {
+      console.log("sukses");
+    })
+    .catch((err) => {
+      console.log("err");
+    });
 
   return response.data;
 };
@@ -34,10 +32,32 @@ const getGoals = async (token) => {
     },
   };
 
-  const response = await axios.get(API_URL, config);
+  const response = await axiosInstance.get("/goals", config);
 
   return response.data;
 };
+
+// GET GOAL
+// export const getGoal =  async (id) => {
+//   const config = {
+//     headers: {
+//       // Accept: 'application/json',
+//       // 'Access-Control-Allow-Origin': '*',
+//       'Content-Type': 'multipart/form-data',
+//     },
+//   }
+
+//   const response = await axiosInstance
+//   .get(`/goals/${id}`, config)
+//   .then((res) => {
+//     console.log("sukses di panggil", res);
+//   })
+//   .catch((err) => {
+//     console.log("err", err);
+//   });
+
+//   return response
+// }
 
 //update
 const updateGoal =  async (data, token, id) => {
@@ -51,8 +71,8 @@ const updateGoal =  async (data, token, id) => {
     },
   }
 
-  const response = await axios
-  .put(API_URL + id, data, config)
+  const response = await axiosInstance
+  .put(`/goals/${id}`, data, config)
   // .then((res) => {
   //   console.log("sukses");
   // })
@@ -76,30 +96,29 @@ const deleteGoal = async (goalId, token) => {
     },
   };
 
-  const response = await axios.delete(API_URL + goalId, config);
+  const response = await axiosInstance.delete("/goals/"+ goalId, config);
 
   return response.data;
 };
 
-const createComment =  async (data, token, id) => {
+export const createComment =  async (data, id) => {
 
   const config = {
     headers: {
-      Authorization: `Bearer ${token}`,
       // Accept: 'application/json',
       // 'Access-Control-Allow-Origin': '*',
       'Content-Type': 'multipart/form-data',
     },
   }
 
-  const response = await axios
-  .post(API_URL + `comment/${id}`, data, config)
-  // .then((res) => {
-  //   console.log("sukses", res);
-  // })
-  // .catch((err) => {
-  //   console.log("err", err);
-  // });
+  const response = await axiosInstance
+  .post(`/goals/comment/${id}`, data, config)
+  .then((res) => {
+    console.log("sukses", res);
+  })
+  .catch((err) => {
+    console.log("err", err);
+  });
 
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data))
@@ -111,9 +130,10 @@ const createComment =  async (data, token, id) => {
 const goalService = {
   createGoal,
   getGoals,
+  // getGoal,
   deleteGoal,
   updateGoal,
-  createComment,
+  // createComment,
 };
 
 export default goalService;

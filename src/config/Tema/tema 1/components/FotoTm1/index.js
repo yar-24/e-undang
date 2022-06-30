@@ -4,22 +4,23 @@ import Fade from "react-reveal/Fade";
 import { FiX } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import Loading from "react-loading";
+import { FormGaleriMusik } from "../../../../../componentsApp";
 
-const FotoTm1 = () => {
+const FotoTm1 = ({galeri}) => {
   const [multipleFiles, setMultipleFiles] = useState([]);
   const [gambar, setGambar] = useState(false);
   const [tempimgSrc, setTempImgSrc] = useState("");
 
-  const { goals, isLoading } = useSelector((state) => state.goals);
+  const {isLoading } = useSelector((state) => state.goals);
 
   const getImg = (filePath) => {
     setTempImgSrc(filePath);
     setGambar(true);
   };
 
-  useEffect(() => {
-    setMultipleFiles(goals[0].files);
-  }, [goals]);
+  // useEffect(() => {
+  //   setMultipleFiles(goals[0].files);
+  // }, [goals]);
 
   return (
     <>
@@ -32,7 +33,7 @@ const FotoTm1 = () => {
             <FiX onClick={() => setGambar(false)} />
           </div>
           <div className="gallery">
-            {multipleFiles.map((file, index) => {
+            {galeri.files?.map((file, index) => {
               return (
                 <div
                   className="pics"

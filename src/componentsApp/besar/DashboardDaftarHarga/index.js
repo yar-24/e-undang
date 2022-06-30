@@ -31,10 +31,6 @@ const DasboardPilihHarga = () => {
     navigate("/pilih-tema");
   };
 
-  const free = () => {
-    navigate("/data-premium");
-  };
-
   return (
     <Container
       style={{
@@ -63,7 +59,7 @@ const DasboardPilihHarga = () => {
           width: click ? "60%" : "100%",
         }}
       />
-      <PilihHargaDashboard width={click && "70%"} hargaFree={free} />
+      <PilihHargaDashboard width={click && "70%"} />
     </Container>
   );
 };

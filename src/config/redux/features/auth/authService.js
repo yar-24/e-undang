@@ -1,10 +1,9 @@
-import axios from 'axios'
+import {axiosInstance} from "../../../../config"
 
-const API_URL = 'http://localhost:5000/api/users/'
 
 // Register user
 const register = async (userData) => {
-  const response = await axios.post(API_URL, userData)
+  const response = await axiosInstance.post("/users/register", userData)
 
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data))
@@ -15,7 +14,7 @@ const register = async (userData) => {
 
 // Login user
 const login = async (userData) => {
-  const response = await axios.post(API_URL + 'login', userData)
+  const response = await axiosInstance.post("/users/login", userData)
 
   if (response.data) {
     localStorage.setItem('user', JSON.stringify(response.data))
@@ -25,18 +24,18 @@ const login = async (userData) => {
 }
 
 //update
-const update =  async (data, id) => {
+const update =  async (data, id, token) => {
 
   const config = {
     headers: {
-      // Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
       // 'Access-Control-Allow-Origin': '*',
       'Content-Type': 'multipart/form-data',
     },
   }
 
-  const response = await axios
-  .put(API_URL + `update/${id}`, data, config)
+  const response = await axiosInstance
+  .put(`/users/update/${id}`, data, config)
   // .then((res) => {
   //   console.log("sukses", res);
   // })

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { AiFillEdit, AiOutlineDashboard, AiOutlineUser } from "react-icons/ai";
 import { GiBigDiamondRing } from "react-icons/gi";
@@ -12,7 +12,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { colors, mobile } from "../../../../utils";
 import Swal from "sweetalert2";
-import { getGoals } from "../../../../config/redux/features/goals/goalSlice";
 
 const Container = styled.div`
   width: 12vw;
@@ -51,23 +50,14 @@ const MenuUser = () => {
 
   const { user } = useSelector((state) => state.auth);
 
-  const { goals, isError, message } = useSelector(
+  const { goals} = useSelector(
     (state) => state.goals
   );
-
-  useEffect(() => {
-    if (isError) {
-      console.log(message);
-    }
-
-    dispatch(getGoals());
-  }, [isError, message, dispatch]);
-
 
   const onLogout = () => {
     Swal.fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: "Kamu ingin Logout!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -96,7 +86,7 @@ const MenuUser = () => {
         footer: 'Segera buat undangan terlebih dahulu!!!'
       })
     } else {
-      navigate(`/blue-flower/:namaTamu/${user._id}`);
+      navigate(`/blue-flower/:namaTamu/${goals[0]._id}`);
     }
   };
 

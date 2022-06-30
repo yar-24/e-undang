@@ -12,6 +12,7 @@ background: ${colors.pinkBgPrimary} ;
   display: flex;
   justify-content: center;
   align-items: center;
+  ${mobile({ maxHeight: "100%" })}
 `;
 
 const Glasses = styled.div`

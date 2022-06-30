@@ -45,7 +45,7 @@ const Text = styled.p`
   ${ipon({ marginBottom: "20px" })};
 `;
 
-function JamTm1() {
+function JamTm1({jam}) {
   const [timerDays, setTimerDays] = useState("00");
   const [timerHours, setTimerHours] = useState("00");
   const [timerMinutes, setTimerMinutes] = useState("00");
@@ -54,8 +54,8 @@ function JamTm1() {
   let interval = useRef();
 
   const startTimer = () => {
-    const countdownDate = new Date("Jan 1, 2023 00:00:00").getTime();
-    interval = setInterval(() => {
+    const countdownDate = new Date(jam).getTime();
+    interval = setInterval(() => {  
       const now = new Date().getTime();
       const distance = countdownDate - now;
       let days = Math.floor(distance / (1000 * 60 * 60 * 24));

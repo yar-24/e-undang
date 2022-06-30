@@ -6,7 +6,6 @@ import { Instagram, Yt, Draw, Background5 } from "../../assets";
 import { ipon, mobile } from "../../../../../responsive";
 import { colors, fonts } from "../../../../../utils";
 import { Bounce } from "react-reveal";
-import { useSelector } from "react-redux";
 
 const Background = styled.div`
   /* background-image: url(${Background5});
@@ -61,16 +60,11 @@ const Image = styled.img`
   margin: 10px 0 10px;
 `;
 
-const KeenamTm1 = () => {
-
-  const { goals, isLoading, isError, message } = useSelector(
-    (state) => state.goals
-  );
+const KeenamTm1 = ({linkLive}) => {
 
   return (
     <Background>
-      {goals.map((item) => (
-        <Bounce bottom cascade key={item._id}>
+        <Bounce bottom cascade>
           <Container>
             <ContainerText>
               <Title>Live Streaming</Title>
@@ -88,7 +82,7 @@ const KeenamTm1 = () => {
                 width={"150px"}
                 label="Klik Disini"
                 icon={<BsCameraVideoFill />}
-                link={item.linkLive}
+                link={linkLive}
               />
             </ContainerLive>
 
@@ -101,12 +95,11 @@ const KeenamTm1 = () => {
                 width={"150px"}
                 label="Klik Disini"
                 icon={<BsCameraVideoFill />}
-                link={item.linkLive}
+                link={linkLive}
               />
             </ContainerLive>
           </Container>
         </Bounce>
-      ))}
     </Background>
   );
 };

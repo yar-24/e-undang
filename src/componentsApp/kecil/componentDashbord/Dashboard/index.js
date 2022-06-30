@@ -1,7 +1,9 @@
+import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 import { getGoals } from "../../../../config/redux/features/goals/goalSlice";
 import { ThemeContext } from "../../../../context";
 import { ImgWelcome } from "../../../../img";
@@ -60,7 +62,7 @@ const Text = styled.p`
   ${mobile({ fontSize: "12px" })}
 `;
 
-const Button = styled(Link)`
+const Button = styled.div`
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -73,15 +75,21 @@ const Button = styled(Link)`
   font-family: ${fonts.montserrat};
   font-weight: 600;
   background-color: ${colors.btnSecondary};
+  cursor: pointer;
   ${mobile({ fontSize: "12px", width: "30vw", padding: 0 })}
 `;
 
 const Dashboard = ({ width }) => {
   const [getGoal, setGetGoal] = useState("");
+  const [order, setOrder] = useState("");
+  const [orderId, setOrderId] = useState("");
+
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const { user, isLoading } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
+  const {isLoading } = useSelector((state) => state.pay);
 
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
@@ -95,13 +103,62 @@ const Dashboard = ({ width }) => {
       .catch((err) => {
         console.log("error: ", err);
       });
-  }, [dispatch]);
+
+      axios.get("http://localhost:5000/api/order",{
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      })
+      .then((res) => {
+        const id = res.data[0].id
+        setOrderId(id)
+      })
+      .catch((err) => {
+       
+      })
+
+    if (orderId) {
+      axios
+        .get(`http://localhost:5000/api/order/status/${orderId}`, {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        })
+        .then((res) => {
+          const data = res.data.data;
+          setOrder(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [dispatch, orderId, user]);
 
   if (isLoading) {
-    return (
-      <Loading type={"balls"} color={"#FFFFFF"} height={"20%"} width={"20%"} />
-    );
+    return <Loading />;
   }
+
+  const handleClick = () => {
+    if (order.transaction_status === "settlement") {
+      navigate("/data-premium");
+    } else if (orderId) {
+      Swal.fire({
+        title: "Kamu sudah melakukan checkout",
+        text: "Silahkan Lanjutkan Pembayaran",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Lanjutkan!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate(`/notification/${orderId}`);
+        }
+      });
+    } else {
+      navigate("/pilih-tema");
+    }
+  };
 
   return (
     <Container
@@ -112,7 +169,7 @@ const Dashboard = ({ width }) => {
         transition: "all 1s ease",
       }}
     >
-      {getGoal? (
+      {getGoal ? (
         <>
           <Top>
             <Image src={ImgWelcome} alt="welcome" />
@@ -137,7 +194,7 @@ const Dashboard = ({ width }) => {
             undangan dapat diubah kapan pun dan berapa pun.
           </Text>
           <Jarak height={10} />
-          <Button to="/pilih-tema">Buat Undangan</Button>
+          <Button onClick={handleClick}>Buat Undangan</Button>
         </>
       )}
     </Container>

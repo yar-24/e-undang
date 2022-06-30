@@ -6,7 +6,6 @@ import { BingkaiTm1, JamTm1, ButtonTm1, JarakTm1 } from "../../components";
 import { BsCalendar3 } from "react-icons/bs";
 import Zoom from "react-reveal/Zoom";
 import { ipon } from "../../../../../responsive";
-import { useSelector } from "react-redux";
 
 const Background = styled.section`
   background-image: url(${Background2});
@@ -44,35 +43,30 @@ const Text = styled.h1`
   ${ipon({ fontSize: "25px" })};
 `;
 
-const KeduaTm1 = ({page}) => {
-  const { goals} = useSelector(
-    (state) => state.goals
-  );
+const KeduaTm1 = ({page, photoBerdua, namaPglCowo, namaPglCewe, linkAlmtAkad, hitungMundur}) => {
 
   return (
     <Background id={page}>
-    {goals.map((item) => (
-      <Container key={item._id}>
+      <Container >
         <JarakTm1 height={400} />
         <Zoom>
-          <BingkaiTm1 mb={5} foto={item.photoBerdua} />
+          <BingkaiTm1 mb={5} foto={photoBerdua} />
         </Zoom>
         <ContainerText>
           <Zoom>
-            <Text>{item.namaPglCowo}</Text>
+            <Text>{namaPglCowo}</Text>
             <h1 style={{margin:0}} >&</h1>
-            <Text>{item.namaPglCewe}</Text>
+            <Text>{namaPglCewe}</Text>
           </Zoom>
         </ContainerText>
-        <JamTm1 />
+        <JamTm1 jam={hitungMundur} />
         <ButtonTm1
           width={"250px"}
           label="Simpan Acara Ke Kalender"
           icon={<BsCalendar3 size={30} />}
-          link={item.linkAlmtAkad}
+          link={linkAlmtAkad}
         />
       </Container>
-    ))}
     </Background>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { BsFillPlayFill, BsPauseFill } from "react-icons/bs";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { mobile } from "../../../../../responsive";
 import { colors } from "../../../../../utils";
@@ -25,40 +26,40 @@ const Button = styled.button`
   border-radius: 50%;
   animation: rotation 3s infinite;
   @keyframes rotation {
-  from {
-    transform: rotate(0deg);
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
   }
-  to {
-    transform: rotate(359deg);
-  }
-}
   ${mobile({ marginBottom: "10vh" })};
 `;
 
-const MusikTm1 = ({ music }) => {
+const MusikTm1 = ({music}) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const audioRef = useRef()
+  const audioRef = useRef();
 
   const play = () => {
-    const audio = audioRef.current
+    const audio = audioRef.current;
 
-    if(!isPlaying) {
-      setIsPlaying(true)
-      audio.play()
+    if (!isPlaying) {
+      setIsPlaying(true);
+      audio.play();
     }
 
-    if(isPlaying){
-      setIsPlaying(false)
-      audio.pause()
+    if (isPlaying) {
+      setIsPlaying(false);
+      audio.pause();
     }
   };
 
   return (
     <Container>
       <Button onClick={play}>
-      {isPlaying ? <BsFillPlayFill /> : <BsPauseFill />}
-      <audio ref={audioRef}  src={music} ></audio>
+        {isPlaying ? <BsFillPlayFill /> : <BsPauseFill />}
+          <audio ref={audioRef} src={music}></audio>
       </Button>
     </Container>
   );

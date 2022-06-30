@@ -25,9 +25,10 @@ const Container = styled.div`
 const DashboardUser = () => {
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
-
+  
   const [click, setClick] = useState(false);
-  const [clickMenu, setclickMenu] = useState(false);
+  const [clickMenu, setclickMenu] = useState(false);  
+
 
   const handleNav = () => setClick(!click);
 
@@ -38,7 +39,6 @@ const DashboardUser = () => {
   const back = () => {
     navigate("/");
   };
-
   return (
     <Container
       style={{
@@ -64,7 +64,7 @@ const DashboardUser = () => {
           width: click ? "60%" : "100%",
         }}
       />
-      <Dashboard width={click ? "60%" : "80%"} />
+      <Dashboard width={click ? "60%" : "80%"}  />
     </Container>
   );
 };

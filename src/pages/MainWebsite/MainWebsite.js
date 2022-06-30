@@ -29,7 +29,7 @@ const MainWebsite = () => {
   const laodDashboard = () => {
     if (isLoading) {
       return (
-        <Loading type={"balls"} color={"#FFFFFF"} height={"20%"} width={"20%"} />
+        <Loading />
         );
       }
       navigate("/dashboard");

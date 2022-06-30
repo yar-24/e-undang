@@ -16,7 +16,7 @@ const Container = styled.div`
   filter: drop-shadow(00px 20px 20px rgba(0, 0, 0, 0.25));
   ${mobile({
     width: "100vw",
-    height: "90vh",
+    height: "94vh",
     background: "rgba(255, 255, 255, 0.15)",
     boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
     backdropFilter: "blur(9.4px)",

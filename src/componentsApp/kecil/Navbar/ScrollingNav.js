@@ -145,11 +145,6 @@ const ScollingNav = ({handleClicks, clicks}) => {
     });
   };
 
-  setTimeout(() => {
-    dispatch(logout());
-    dispatch(reset());
-  }, 200000);
-
 
   return (
     <Container >

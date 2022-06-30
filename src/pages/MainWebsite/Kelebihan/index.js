@@ -13,7 +13,7 @@ const BackgroundKelebihan = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px 0 20px;
-  ${mobile({ height: "100%" })}
+  ${mobile({ maxHeight: "100%" })}
   ${tablet({ height: "100%" })}
 `;
 

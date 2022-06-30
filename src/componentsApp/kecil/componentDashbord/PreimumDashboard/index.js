@@ -20,6 +20,7 @@ import Swal from "sweetalert2";
 import { ThemeContext } from "../../../../context";
 import Loading from "../../Loading";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Container = styled.div`
   padding-top: 20vh;
@@ -175,6 +176,7 @@ const PremiumDashboard = ({ styleBtn, width, tombol }) => {
   // const { user } = useSelector((state) => state.auth);
 
   const [isUpdate, setIsUpdate] = useState(false);
+  const [sizeFiles, setSizeFiles] = useState();
   const [data, setData] = useState("");
 
   //USE STATE PRIA
@@ -200,12 +202,14 @@ const PremiumDashboard = ({ styleBtn, width, tombol }) => {
   //AKAD
   const [tglAkad, setTglAkad] = useState("");
   const [waktuAkad, setWaktuAkad] = useState("");
+  const [waktuBagianAkad, setWaktuBagianAkad] = useState("");
   const [alamatAkad, setAlamatAkad] = useState("");
   const [linkAlmtAkad, setLinkAlmtAkad] = useState("");
 
   //RESEPSI
   const [tglResepsi, setTglResepsi] = useState("");
   const [waktuResepsi, setWaktuResepsi] = useState("");
+  const [waktuBagianResepsi, setWaktuBagianResepsi] = useState("");
   const [alamatResepsi, setAlamatResepsi] = useState("");
   const [linkAlmtResepsi, setLinkAlmtResepsi] = useState("");
 
@@ -275,10 +279,12 @@ const PremiumDashboard = ({ styleBtn, width, tombol }) => {
       setLinkFBCewe(data.linkFBCewe);
       setTglAkad(data.tglAkad);
       setWaktuAkad(data.waktuAkad);
+      setWaktuBagianAkad(data.waktuBagianAkad);
       setAlamatAkad(data.alamatAkad);
       setLinkAlmtAkad(data.linkAlmtAkad);
       setTglResepsi(data.tglResepsi);
       setWaktuResepsi(data.waktuResepsi);
+      setWaktuBagianResepsi(data.waktuBagianResepsi);
       setAlamatResepsi(data.alamatResepsi);
       setLinkAlmtResepsi(data.linkAlmtResepsi);
       setNamaBank(data.namaBank);
@@ -294,119 +300,148 @@ const PremiumDashboard = ({ styleBtn, width, tombol }) => {
   }, [data]);
 
   const onSubmit = () => {
-    const data = new FormData();
+    const MAX_LENGTH = 13;
 
-    //PRIA
-    data.append("photoCowo", photoCowo);
-    data.append("namaLkpCowo", namaLkpCowo);
-    data.append("namaPglCowo", namaPglCowo);
-    data.append("namaAyahCowo", namaAyahCowo);
-    data.append("namaIbuCowo", namaIbuCowo);
-    data.append("urutanAnakCowo", urutanAnakCowo);
-    data.append("linkIGCowo", linkIGCowo);
-    data.append("linkFBCowo", linkFBCowo);
-    setNamaLkpCowo("");
-    setNamaPglCowo("");
-    setNamaAyahCowo("");
-    setNamaIbuCowo("");
-    setUrutanAnakCowo("");
-    setLinkIGCowo("");
-    setLinkFBCowo("");
-
-    //WANITA
-    data.append("photoCewe", photoCewe);
-    data.append("namaLkpCewe", namaLkpCewe);
-    data.append("namaPglCewe", namaPglCewe);
-    data.append("namaAyahCewe", namaAyahCewe);
-    data.append("namaIbuCewe", namaIbuCewe);
-    data.append("urutanAnakCewe", urutanAnakCewe);
-    data.append("linkIGCewe", linkIGCewe);
-    data.append("linkFBCewe", linkFBCewe);
-    setNamaLkpCewe("");
-    setNamaPglCewe("");
-    setNamaAyahCewe("");
-    setNamaIbuCewe("");
-    setUrutanAnakCewe("");
-    setLinkIGCewe("");
-    setLinkFBCewe("");
-
-    //AKAD
-    data.append("tglAkad", tglAkad);
-    data.append("waktuAkad", waktuAkad);
-    data.append("alamatAkad", alamatAkad);
-    data.append("linkAlmtAkad", linkAlmtAkad);
-    setTglAkad("");
-    setWaktuAkad("");
-    setAlamatAkad("");
-    setLinkAlmtAkad("");
-    //RESEPSI
-    data.append("tglResepsi", tglResepsi);
-    data.append("waktuResepsi", waktuResepsi);
-    data.append("alamatResepsi", alamatResepsi);
-    data.append("linkAlmtResepsi", linkAlmtResepsi);
-    setTglResepsi("");
-    setWaktuResepsi("");
-    setAlamatResepsi("");
-    setLinkAlmtResepsi("");
-
-    // //DOMPET DIGITAL
-    data.append("namaBank", namaBank);
-    data.append("noRek", noRek);
-    data.append("atasNamaBank", atasNamaBank);
-    data.append("namaDompet", namaDompet);
-    data.append("noHp", noHp);
-    data.append("atasNamaDompet", atasNamaDompet);
-    setNamaBank("");
-    setNoRek("");
-    setAtasNamaBank("");
-    setNamaDompet("");
-    setNoHp("");
-    setAtasNamaDompet("");
-
-    //GALERI
     for (let i = 0; i < galeri.length; i++) {
-      data.append("files", galeri[i]);
+      setSizeFiles(galeri[i].size); 
     }
-    data.append("photoBerdua", photoBerdua);
-    data.append("music", music);
-    data.append("idYT", idYT);
-    data.append("linkLive", linkLive);
-    setMusic("");
-    setPhotoBerdua("");
-    setIdYT("");
-    setLinkLive("");
 
-    if (isUpdate) {
-      Swal.fire({
-        title: "Apa kamu benar ingin Mengdatad?",
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: "Save",
-        denyButtonText: `Don't save`,
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          // dispatch(dataGoals(data))
-          Swal.fire("Saved!", "", "success", dispatch(updateGoal(data)));
-        } else if (result.isDenied) {
-          Swal.fire("Changes are not saved", "", "info");
-        }
-      });
+    const fsizeMusic = music.size;
+    const fsizePhotoCowo = photoCowo.size;
+    const fsizePhotoCewe = photoCewe.size;
+    const fsizePhotoBerdua = photoBerdua.size;
+    const fileMusic = Math.round(fsizeMusic / 1024);
+    const filePhotoCowo = Math.round(fsizePhotoCowo / 1024);
+    const filePhotoCewe = Math.round(fsizePhotoCewe / 1024);
+    const filePhotoBerdua = Math.round(fsizePhotoBerdua / 1024);
+    const filesGaleri = Math.round(sizeFiles / 1024);
+
+    if (galeri.length > MAX_LENGTH) {
+      toast.error(`Files Max ${MAX_LENGTH}`);
+    } else if (filesGaleri >= 6144) {
+      toast.error("Files Galeri Max 6Mb");
+    } else if (fileMusic >= 4096) {
+      toast.error("File Musik Max 4Mb");
+    } else if (filePhotoCowo >= 1024) {
+      toast.error("File Photo Pria Max 1Mb");
+    } else if (filePhotoCewe >= 1024) {
+      toast.error("File Photo Wanita Max 1Mb");
+    } else if (filePhotoBerdua >= 1024) {
+      toast.error("File Photo Berdua Max 1Mb");
     } else {
-      Swal.fire({
-        title: "Do you want to save the changes?",
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: "Save",
-        denyButtonText: `Don't save`,
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          Swal.fire("Saved!", "", "success", dispatch(createGoal(data)));
-        } else if (result.isDenied) {
-          Swal.fire("Changes are not saved", "", "info");
-        }
-      });
+      const data = new FormData();
+
+      //PRIA
+      data.append("photoCowo", photoCowo);
+      data.append("namaLkpCowo", namaLkpCowo);
+      data.append("namaPglCowo", namaPglCowo);
+      data.append("namaAyahCowo", namaAyahCowo);
+      data.append("namaIbuCowo", namaIbuCowo);
+      data.append("urutanAnakCowo", urutanAnakCowo);
+      data.append("linkIGCowo", linkIGCowo);
+      data.append("linkFBCowo", linkFBCowo);
+
+      //WANITA
+      data.append("photoCewe", photoCewe);
+      data.append("namaLkpCewe", namaLkpCewe);
+      data.append("namaPglCewe", namaPglCewe);
+      data.append("namaAyahCewe", namaAyahCewe);
+      data.append("namaIbuCewe", namaIbuCewe);
+      data.append("urutanAnakCewe", urutanAnakCewe);
+      data.append("linkIGCewe", linkIGCewe);
+      data.append("linkFBCewe", linkFBCewe);
+
+      //AKAD
+      data.append("tglAkad", tglAkad);
+      data.append("waktuAkad", waktuAkad);
+      data.append("waktuBagianAkad", waktuBagianAkad);
+      data.append("alamatAkad", alamatAkad);
+      data.append("linkAlmtAkad", linkAlmtAkad);
+
+      //RESEPSI
+      data.append("tglResepsi", tglResepsi);
+      data.append("waktuResepsi", waktuResepsi);
+      data.append("waktuBagianResepsi", waktuBagianResepsi);
+      data.append("alamatResepsi", alamatResepsi);
+      data.append("linkAlmtResepsi", linkAlmtResepsi);
+
+      // //DOMPET DIGITAL
+      data.append("namaBank", namaBank);
+      data.append("noRek", noRek);
+      data.append("atasNamaBank", atasNamaBank);
+      data.append("namaDompet", namaDompet);
+      data.append("noHp", noHp);
+      data.append("atasNamaDompet", atasNamaDompet);
+
+      //GALERI
+      data.append("photoBerdua", photoBerdua);
+      data.append("music", music);
+      data.append("idYT", idYT);
+      data.append("linkLive", linkLive);
+
+      for (let i = 0; i < galeri.length; i++) {
+        data.append("files", galeri[i]);
+      }
+      if (isUpdate) {
+        Swal.fire({
+          title: "Apa kamu benar ingin Mengupdated?",
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: "Save",
+          denyButtonText: `Don't save`,
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            // dispatch(dataGoals(data))
+            Swal.fire("Saved!", "", "success", dispatch(updateGoal(data)));
+          } else if (result.isDenied) {
+            Swal.fire("Changes are not saved", "", "info");
+          }
+        });
+      } else {
+        Swal.fire({
+          title: "Apa kamu benar ingin save?",
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: "Save",
+          denyButtonText: `Don't save`,
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            Swal.fire("Saved!", "", "success", dispatch(createGoal(data)));
+            setNamaLkpCowo("");
+            setNamaPglCowo("");
+            setNamaAyahCowo("");
+            setNamaIbuCowo("");
+            setUrutanAnakCowo("");
+            setLinkIGCowo("");
+            setLinkFBCowo("");
+            setNamaLkpCewe("");
+            setNamaPglCewe("");
+            setNamaAyahCewe("");
+            setNamaIbuCewe("");
+            setUrutanAnakCewe("");
+            setLinkIGCewe("");
+            setLinkFBCewe("");
+            setTglAkad("");
+            setWaktuAkad("");
+            setAlamatAkad("");
+            setLinkAlmtAkad("");
+            setTglResepsi("");
+            setWaktuResepsi("");
+            setAlamatResepsi("");
+            setLinkAlmtResepsi("");
+            setNamaBank("");
+            setNoRek("");
+            setAtasNamaBank("");
+            setNamaDompet("");
+            setNoHp("");
+            setAtasNamaDompet("");
+          } else if (result.isDenied) {
+            Swal.fire("Changes are not saved", "", "info");
+          }
+        });
+      }
     }
   };
 
@@ -423,18 +458,13 @@ const PremiumDashboard = ({ styleBtn, width, tombol }) => {
   };
 
   const onGetUndang = () => {
-    navigate(`/blue-flower/:namaTamu/${user._id}`);
+    navigate(`/blue-flower/:namaTamu/${goals[0]._id}`);
   };
 
   return (
     <>
       {isLoading ? (
-        <Loading
-          type={"balls"}
-          color={"#FFFFFF"}
-          height={"20%"}
-          width={"20%"}
-        />
+        <Loading />
       ) : (
         <Container>
           <ContainerData
@@ -494,6 +524,7 @@ const PremiumDashboard = ({ styleBtn, width, tombol }) => {
           >
             <FormAkad
               tglAkad={tglAkad}
+              onWaktuBagianAkad={(e) => setWaktuBagianAkad(e)}
               onChangeTglAkad={(e) => setTglAkad(e.target.value)}
               waktuAkad={waktuAkad}
               onChangeWaktuAkad={(e) => setWaktuAkad(e.target.value)}
@@ -504,6 +535,7 @@ const PremiumDashboard = ({ styleBtn, width, tombol }) => {
             />
             <FormResepsi
               tglResepsi={tglResepsi}
+              onWaktuBagianResepsi={(e) => setWaktuBagianResepsi(e)}
               onChangeTglResepsi={(e) => setTglResepsi(e.target.value)}
               waktuResepsi={waktuResepsi}
               onChangeWaktuResepsi={(e) => setWaktuResepsi(e.target.value)}

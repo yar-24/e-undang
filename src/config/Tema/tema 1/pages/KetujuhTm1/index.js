@@ -6,7 +6,6 @@ import { FaCopy } from "react-icons/fa";
 import { colors, fonts } from "../../../../../utils";
 import { ButtonTm1 } from "../../components";
 import { Bounce } from "react-reveal";
-import { useSelector } from "react-redux";
 
 const Background = styled.div``;
 const Container = styled.div`
@@ -58,19 +57,17 @@ const Image = styled.img`
 
 const ContainerButton = styled.div``;
 
-const KetujuhTm1 = () => {
+const KetujuhTm1 = (props) => {
+
+  const {noRek, atasNamaBank, noHp, atasNamaDompet} = props
+
   const [Bridone, BrisetDone] = useState(false);
   const [Spdone, SpsetDone] = useState(false);
-
-  const { goals} = useSelector(
-    (state) => state.goals
-  );
 
 
   return (
     <>
-      {goals.map((item) => (
-        <Background key={item._id}>
+        <Background>
           <Bounce bottom cascade>
             <Container>
               <ContainerText>
@@ -88,9 +85,9 @@ const KetujuhTm1 = () => {
 
               <ContainerCard>
                 <Image src={Bri} />
-                <Text>No. Rekening : {item.noRek}</Text>
+                <Text>No. Rekening : {noRek}</Text>
                 <Hr />
-                <Text>A/n {item.atasNamaBank}</Text>
+                <Text>A/n {atasNamaBank}</Text>
                 <ContainerButton>
                   <ButtonTm1
                     padding={"0px"}
@@ -98,7 +95,7 @@ const KetujuhTm1 = () => {
                     label={(Bridone && "Copy Berhasil") || "Copy Text"}
                     icon={<FaCopy />}
                     onClick={() =>
-                      BrisetDone(navigator.clipboard.writeText(item.noRek))
+                      BrisetDone(navigator.clipboard.writeText(noRek))
                     }
                   />
                 </ContainerButton>
@@ -106,9 +103,9 @@ const KetujuhTm1 = () => {
 
               <ContainerCard>
                 <Image src={ShopeePay} />
-                <Text>No. Telp : {item.noHp}</Text>
+                <Text>No. Telp : {noHp}</Text>
                 <Hr />
-                <Text>A/n {item.atasNamaDompet}</Text>
+                <Text>A/n {atasNamaDompet}</Text>
                 <ContainerButton>
                   <ButtonTm1
                     padding={"0px"}
@@ -116,7 +113,7 @@ const KetujuhTm1 = () => {
                     label={(Spdone && "Copy Berhasil") || "Copy Text"}
                     icon={<FaCopy />}
                     onClick={() =>
-                      SpsetDone(navigator.clipboard.writeText( item.noHp ))
+                      SpsetDone(navigator.clipboard.writeText( noHp ))
                     }
                   />
                 </ContainerButton>
@@ -124,7 +121,6 @@ const KetujuhTm1 = () => {
             </Container>
           </Bounce>
         </Background>
-      ))}
     </>
   );
 };

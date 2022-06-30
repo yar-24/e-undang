@@ -57,7 +57,7 @@ const HapusUndangan = () => {
           footer: 'Segera buat undangan terlebih dahulu!!!'
         })
       } else {
-        navigate(`/blue-flower/:namaTamu/${user._id}`);
+        navigate(`/blue-flower/:namaTamu/${goals[0]._id}`);
       }
   };
 

@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Loading from "react-loading";
-import { useSelector } from "react-redux";
+import React from "react";
 import styled from "styled-components";
 import { mobile } from "../../../../../responsive";
 import { colors, fonts } from "../../../../../utils";
@@ -50,41 +48,60 @@ const NamaComment = styled.p`
 `;
 
 const Tanggal = styled.p`
+  font-size: 12px;
   text-align: right;
+  ${mobile({ fontSize: "8px" })};
 `;
 
 const Comment = styled.p`
   font-weight: 700;
   margin-top: 5px;
+  font-family: ${fonts.josefinSans} ;
 `;
 
-const KomentarTm1 = () => {
-  const [komen, setKomen] = useState([]);
+const KomentarTm1 = ({ data }) => {
+  //  const prevDate = moment(previousDate).fromNow();
 
-  const { goals, isLoading } = useSelector((state) => state.goals);
-
-  useEffect(() => {
-    setKomen(goals[0].comments);
-  }, [goals]);
+  const timeAgo = (prevDate) => {
+    const diff = Number(new Date()) - prevDate;
+    const minute = 60 * 1000;
+    const hour = minute * 60;
+    const day = hour * 24;
+    const month = day * 30;
+    const year = day * 365;
+    switch (true) {
+      case diff < minute:
+        const seconds = Math.round(diff / 1000);
+        return `${seconds} ${seconds > 1 ? "detik" : "detik"} yang lalu`;
+      case diff < hour:
+        return Math.round(diff / minute) + " menit yang lalu";
+      case diff < day:
+        return Math.round(diff / hour) + " jam yang lalu";
+      case diff < month:
+        return Math.round(diff / day) + " hari yang lalu";
+      case diff < year:
+        return Math.round(diff / month) + " bulan yang lalu";
+      case diff > year:
+        return Math.round(diff / year) + " tahun yang lalu";
+      default:
+        return "";
+    }
+  };
 
   return (
     <>
-      {isLoading ? (
-        <Loading type={"soin"} color={"#FFFFFF"} height={"20%"} width={"20%"} />
-      ) : (
-        <ContainerComments>
-          <Text>Ucapan & Doa</Text>
-          {komen.map((item) => (
-            <WrapperComment key={item._id}>
-              <TopComment>
-                <NamaComment>{item.nameComment}</NamaComment>
-                <Tanggal>{new Date(item.date).toLocaleDateString()}</Tanggal>
-              </TopComment>
-              <Comment>{item.isiComment}</Comment>
-            </WrapperComment>
-          ))}
-        </ContainerComments>
-      )}
+      <ContainerComments>
+        <Text>Ucapan & Doa</Text>
+        {data?.reverse().map((item) => (
+          <WrapperComment key={item._id}>
+            <TopComment>
+              <NamaComment>{item.nameComment}</NamaComment>
+              <Tanggal>{timeAgo(new Date(item.date).getTime())}</Tanggal>
+            </TopComment>
+            <Comment>{item.isiComment}</Comment>
+          </WrapperComment>
+        ))}
+      </ContainerComments>
     </>
   );
 };

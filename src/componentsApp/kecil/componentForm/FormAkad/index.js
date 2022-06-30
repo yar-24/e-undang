@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { ThemeContext } from "../../../../context";
 import { colors, fonts, mobile } from "../../../../utils";
 import Inputan from "../../Inputan";
+import { RadioGroup, ReversedRadioButton } from "react-radio-buttons";
 
 const Container = styled.div`
   display: flex;
@@ -49,6 +50,26 @@ const Hr = styled.hr`
   ${mobile({ display: "flex", width: "90%", marginTop: "10px" })}
 `;
 
+const ContainerWaktu = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 30vh;
+  width: 90%;
+  ${mobile({ height: "15vh", flexDirection: "column", marginBottom: "10px" })}
+`;
+
+const RadioContainer = styled(RadioGroup)`
+  width: 50%;
+  height: 50px;
+  display: flex;
+  margin-top: 10px;
+  ${mobile({ position: "relative" })}
+`;
+
+const Radio = styled(ReversedRadioButton)`
+  ${mobile({ fontSize: "12px" })}
+`;
+
 const FormAkad = (props) => {
   const {
     tglAkad,
@@ -59,6 +80,7 @@ const FormAkad = (props) => {
     onChangeAlamatAkad,
     linkAlmtAkad,
     onChangeLinkAlmtAkad,
+    onWaktuBagianAkad,
   } = props;
 
   const theme = useContext(ThemeContext);
@@ -73,12 +95,42 @@ const FormAkad = (props) => {
         value={tglAkad}
         onChange={onChangeTglAkad}
       />
-      <Inputan
-        label="Waktu Akad"
-        placeholder="00:00 WIB/WITA/WIT"
-        value={waktuAkad}
-        onChange={onChangeWaktuAkad}
-      />
+      <ContainerWaktu>
+        <Inputan
+          label="Waktu Akad"
+          type="time"
+          placeholder="00:00 WIB/WITA/WIT"
+          value={waktuAkad}
+          onChange={onChangeWaktuAkad}
+          styleContainer={{ margin: 0, width: "100%" }}
+        />
+        <RadioContainer onChange={onWaktuBagianAkad}>
+          <Radio
+            pointColor={darkMode ? "#50bafe" : colors.btnSecondary}
+            rootColor={darkMode && "#999"}
+            padding={5}
+            value="WIB"
+          >
+            WIB
+          </Radio>
+          <Radio
+            pointColor={darkMode ? "#50bafe" : colors.btnSecondary}
+            rootColor={darkMode && "#999"}
+            padding={5}
+            value="WITA"
+          >
+            WITA
+          </Radio>
+          <Radio
+            pointColor={darkMode ? "#50bafe" : colors.btnSecondary}
+            rootColor={darkMode && "#999"}
+            padding={5}
+            value="WIT"
+          >
+            WIT
+          </Radio>
+        </RadioContainer>
+      </ContainerWaktu>
       <ContainerTextArea>
         <Text>Alamat Akad</Text>
         <TextArea

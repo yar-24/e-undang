@@ -15,7 +15,9 @@ import BtnHome from "./BtnHome";
 import ButtonIcon from "./ButtonIcon";
 import CardTemaUndangan from "./CardTemaUndangan";
 import HapusUndangan from "./HapusUndangan";
-import { NavDasboard, ScrollDashboard, MenuUser, Navigator, Dashboard, PilihTemaDashboard } from "./componentDashbord";
+import ModePembayaran from "./ModePembayaran";
+import FormPembayaran from "./FormPembayaran";
+import { NavDasboard, ScrollDashboard, MenuUser, Navigator, Dashboard, PilihTemaDashboard, Notification } from "./componentDashbord";
 
 export {
   Partikel,
@@ -41,4 +43,7 @@ export {
   PilihTemaDashboard,
   CardTemaUndangan,
   HapusUndangan,
+  Notification,
+  ModePembayaran,
+  FormPembayaran
 };

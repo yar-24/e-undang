@@ -13,7 +13,7 @@ const Container = styled.div`
   max-height: 650px ;
   margin-bottom: 20px ;
   background: ${colors.pinkBgSecondary};
-  ${mobile({height: "100%"})}
+  ${mobile({ maxHeight: "100%" })}
   ${tablet({height: "100%"})}
 `;
 

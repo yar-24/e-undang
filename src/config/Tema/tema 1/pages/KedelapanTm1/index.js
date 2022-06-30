@@ -5,9 +5,12 @@ import { InputanTm1, JarakTm1, KomentarTm1 } from "../../components";
 import { Background5 } from "../../assets";
 import { Zoom } from "react-reveal";
 import { mobile } from "../../../../../responsive";
-import { useDispatch } from "react-redux";
-import { createComment } from "../../../../redux/features/goals/goalSlice";
+import { useDispatch, useSelector } from "react-redux";
+// import { createComment } from "../../../../redux/features/goals/goalSlice";
 import Swal from 'sweetalert2'
+import { useNavigate, useParams } from "react-router-dom";
+import { Loading } from "../../../../../componentsApp";
+import { createComment } from "../../../../redux/features/goals/goalService";
 
 const Background = styled.div`
   /* background-image: url(${Background5});
@@ -39,7 +42,7 @@ const Title = styled.h1`
   color: ${colors.primary};
 `;
 
-const ContainerInput = styled.div``;
+const ContainerInput = styled.form``;
 
 const Text = styled.h1``;
 
@@ -60,12 +63,18 @@ const Kirim = styled.button`
   }
 `;
 
-const KedelapanTm1 = ({ page }) => {
+const KedelapanTm1 = ({ page, komentar }) => {
   const [nameComment, setNameComment] = useState("");
   const [comment, setComment] = useState("");
-  const [respon, setRespon] = useState(false);
+
+  const { isLoading } = useSelector(
+    (state) => state.goals
+  );
 
   const dispatch = useDispatch()
+  const params = useParams()
+
+  const id = params.id
 
   const kirimComment = () => {
     const data = new FormData();
@@ -79,14 +88,16 @@ const KedelapanTm1 = ({ page }) => {
         text: 'Something went wrong!',
       })
     } else {
-      setRespon(true);
       setNameComment("");
       setComment("");
 
-      dispatch(createComment(data))
-      // console.log(data);
+      dispatch(createComment(data, id))
     }
   };
+
+  if(isLoading){
+    <Loading/>
+  }
 
   return (
     <Background id={page}>
@@ -96,7 +107,7 @@ const KedelapanTm1 = ({ page }) => {
             <Title>Ucapkan Sesuatu</Title>
             <Text>Berikan ucapan & Doa Restu Kalian</Text>
           </ContainerText>
-          <ContainerInput>
+          <ContainerInput onSubmit={kirimComment}>
             <InputanTm1
               placeholder="Nama"
               value={nameComment}
@@ -111,11 +122,10 @@ const KedelapanTm1 = ({ page }) => {
               onChange={(e) => setComment(e.target.value)}
             />
             <JarakTm1 height={30} />
-            <Kirim onClick={() => kirimComment()}>Kirim Ucapan</Kirim>
-            {respon && <Text>Terima kasih atas Ucapannya</Text>}
+            <Kirim >Kirim Ucapan</Kirim>
           </ContainerInput>
           <JarakTm1 height={20} />
-          <KomentarTm1/>
+          <KomentarTm1 data={komentar.comments} />
         </Container>
       </Zoom>
     </Background>

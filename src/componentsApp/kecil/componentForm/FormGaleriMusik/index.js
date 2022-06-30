@@ -67,7 +67,7 @@ const FormGaleriMusik = (props) => {
   } = props;
 
   const onFiles = (e) => {
-    setFiles(e.target.files)
+   setFiles(e.target.files)
   };
 
   const onMusic = (e) => {

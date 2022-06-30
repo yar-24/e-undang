@@ -166,7 +166,7 @@ const Login = () => {
         icon: 'success',
         title: 'Login Berhasil!',
         showConfirmButton: false,
-        timer: 1500
+        timer: 1000
       })
       navigate("/dashboard");
     }
@@ -194,12 +194,16 @@ const Login = () => {
 
   if (isLoading) {
     return (
-      <Loading type={"balls"} color={"#FFFFFF"} height={"20%"} width={"20%"} />
+      <Loading />
     );
   }
 
   const google = () => {
-    window.open("http://localhost:5000/auth/google", "_self")
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Maaf fitur ini belum tersedia! 🙏",
+    });
   }
 
   return (

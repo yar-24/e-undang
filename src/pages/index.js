@@ -7,6 +7,6 @@ import PilihHargaPage from "./PilihHargaPage";
 import PremiumPage from "./PremiumPage";
 import Profile from "./Profile";
 import ErrorPage from "./ErrorPage";
-import Notification from "./Notification"
+import NotificationPage from "./NotificationPage"
 
-export {Login, Register, MainWebsite, DashboardPage, PilihTemaPage, PilihHargaPage, PremiumPage, Profile, ErrorPage, Notification}
+export {Login, Register, MainWebsite, DashboardPage, PilihTemaPage, PilihHargaPage, PremiumPage, Profile, ErrorPage, NotificationPage}

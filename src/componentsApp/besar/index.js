@@ -6,6 +6,7 @@ import DasboardPilihTema from "./DashboardPilihTema";
 import DasboardPilihHarga from "./DashboardDaftarHarga";
 import DashboardPremium from "./DashboardPremium";
 import DasboardProfile from "./DashboardProfile";
+import DasboardNotification from "./DasboardNotification";
 
 export {
   RightHomePage,
@@ -16,4 +17,5 @@ export {
   DasboardPilihHarga,
   DashboardPremium,
   DasboardProfile,
+  DasboardNotification
 };

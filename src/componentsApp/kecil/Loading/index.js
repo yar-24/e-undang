@@ -22,10 +22,10 @@ const Container = styled.div`
   ${mobile({ paddingBottom: "20rem"})};
 `;
 
-const Loading = ({type, color}) => {
+const Loading = () => {
   return (
     <Container>
-      <ReactLoading type={type} color={color} height={'10%'} width={'10%'} />
+      <ReactLoading type={"balls"} color={"#FCF2F3"} height={'20%'} width={'20%'} />
     </Container>
   );
 };

@@ -17,7 +17,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;  
-    ${mobile({right: "50%", top: "25px"})}
+    ${mobile({right: "20px", top: "70px", position: "absolute"})}
 `
 const Icon = styled.img`
     width: 15px;

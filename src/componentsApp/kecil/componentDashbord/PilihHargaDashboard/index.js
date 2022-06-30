@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { ThemeContext } from "../../../../context";
 import { fonts, mobile } from "../../../../utils";
 import CardHarga from "../../CardHarga";
+import ModePembayaran from "../../ModePembayaran";
 
 const Container = styled.div`
   display: flex;
@@ -38,9 +39,22 @@ const Title = styled.h1`
 const ContainerCardHarga = styled.div``;
 
 const PilihHargaDashboard = ({ hargaFree, width }) => {
+  const [onClick, setOnClick] = useState(false);
+
   const theme = useContext(ThemeContext);
   const darkMode = theme.state.darkMode;
+
+  const handleClick = () => {
+    setOnClick(true);
+  }
+
+  const handleClose = () => {
+    setOnClick(false)
+  }
+
   return (
+    <>
+    {onClick && <ModePembayaran handleClose={handleClose} />}
     <Container
       style={{
         color: darkMode ? "#ffffff" : "#333",
@@ -54,10 +68,11 @@ const PilihHargaDashboard = ({ hargaFree, width }) => {
         <CardHarga
           style={{ backgroundColor: darkMode && "#333" }}
           bgColor={darkMode && "#333"}
-          free={hargaFree}
+          handlePremium={handleClick}
         />
       </ContainerCardHarga>
     </Container>
+    </>
   );
 };
 

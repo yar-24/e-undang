@@ -244,7 +244,7 @@ const Register = () => {
 
               <ContainerBottom>
                 <ReCAPTCHA
-                  sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                  sitekey="6LcHAI0gAAAAAOD-4AdhDxBchgvzOSnJUead8dul"
                   // onChange={onChange}
                   theme="light"
                 />
